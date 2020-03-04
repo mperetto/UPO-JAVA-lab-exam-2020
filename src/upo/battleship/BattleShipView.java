@@ -11,15 +11,24 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
-public class BattleShipView extends JFrame {
+/**
+ * @author Marco Peretto
+ * 
+ * Questa classe gestisce la vista dell'applicazione.
+ * Mette a disposizione tre finestre che permettono nello specifico di gestire le impostazioni della partita, di visualizzare la mappa di gioco e di posizionare le rispetttive navi.
+ * 
+ * */
+public class BattleShipView {
 	
 	/*final JComboBox<String> cmbDimGriglia;
 	JButton btnCaricaPartita, btnGioca;
@@ -30,21 +39,25 @@ public class BattleShipView extends JFrame {
 	 * 
 	 * */
 	public BattleShipView() {
-		super();
+		//super();
 		
 		SettaggiPartitaView settings = new SettaggiPartitaView();
 		GiocoView gioco = new GiocoView(20);
 		gioco.aggiungiEl();
+		gioco.posizioneNave();
 		
 	}
 	
-	class SettaggiPartitaView {
+	class SettaggiPartitaView extends JFrame{
 		
 		final JComboBox<String> cmbDimGriglia;
 		JButton btnCaricaPartita, btnGioca;
 		JButton btnPiuSottomarino, btnMenoSottomarino, btnPiuPortaerei, btnMenoPortaerei, btnPiuIncrociatore, btnMenoIncrociatore;
+		JLabel lblNumSottomarini, lblNumPortaerei, lblNumIncrociatori;
 		
 		public SettaggiPartitaView() {
+			super("BattleShip");
+			
 			JPanel panel = new JPanel();
 			BoxLayout layoutYAxis = new BoxLayout(panel, BoxLayout.Y_AXIS);
 			
@@ -73,7 +86,10 @@ public class BattleShipView extends JFrame {
 			
 			btnMenoSottomarino = new JButton("-");
 			panelBoxXAxis.add(btnMenoSottomarino);	
-			panelBoxXAxis.add(new JLabel("1"));		//dichiarazione anonima provvisoria sarà necessario aggiornare il valore
+			
+			lblNumSottomarini = new JLabel("1");
+			
+			panelBoxXAxis.add(lblNumSottomarini);
 			btnPiuSottomarino = new JButton("+");
 			panelBoxXAxis.add(btnPiuSottomarino);
 			panelBoxXAxis.add(new JLabel("Sottomarini (1x3)"));
@@ -86,8 +102,11 @@ public class BattleShipView extends JFrame {
 			panelBoxXAxis.setLayout(new BoxLayout(panelBoxXAxis, BoxLayout.X_AXIS));
 			
 			btnMenoPortaerei = new JButton("-");
-			panelBoxXAxis.add(btnMenoPortaerei);	
-			panelBoxXAxis.add(new JLabel("1"));		//dichiarazione anonima provvisoria sarà necessario aggiornare il valore
+			panelBoxXAxis.add(btnMenoPortaerei);
+			
+			lblNumPortaerei = new JLabel("1");
+			
+			panelBoxXAxis.add(lblNumPortaerei);
 			btnPiuPortaerei = new JButton("+");
 			panelBoxXAxis.add(btnPiuPortaerei);
 			panelBoxXAxis.add(new JLabel("Portaerei (1x5)"));
@@ -100,8 +119,11 @@ public class BattleShipView extends JFrame {
 			panelBoxXAxis.setLayout(new BoxLayout(panelBoxXAxis, BoxLayout.X_AXIS));
 			
 			btnMenoIncrociatore = new JButton("-");
-			panelBoxXAxis.add(btnMenoIncrociatore);	
-			panelBoxXAxis.add(new JLabel("0"));		//dichiarazione anonima provvisoria sarà necessario aggiornare il valore
+			panelBoxXAxis.add(btnMenoIncrociatore);
+			
+			lblNumIncrociatori = new JLabel("0");
+			
+			panelBoxXAxis.add(lblNumIncrociatori);
 			btnPiuIncrociatore = new JButton("+");
 			panelBoxXAxis.add(btnPiuIncrociatore);
 			panelBoxXAxis.add(new JLabel("Incrociatore (1x4)"));
@@ -121,15 +143,15 @@ public class BattleShipView extends JFrame {
 			
 			panel.add(panelBoxXAxis);
 			
-			JFrame f = new JFrame("BattleShip");
-		    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		    f.setContentPane(panel);
-		    f.pack();
-		    f.setVisible(true);
+			//JFrame f = new JFrame("BattleShip");
+		    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		    this.setContentPane(panel);
+		    this.pack();
+		    this.setVisible(true);
 		}
 	}
 	
-	class GiocoView {
+	class GiocoView extends JFrame{
 		
 		JButton btnSalvaPartita, btnNuovaPartita;
 		private JLabel[][] gridPlayer, gridEnemy;
@@ -179,11 +201,33 @@ public class BattleShipView extends JFrame {
 			
 			panel.add(panelBoxXAxis);
 			
-			JFrame f = new JFrame("BattleShip");
-		    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		    f.setContentPane(panel);
-		    f.pack();
-		    f.setVisible(true);
+			
+		    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		    this.setContentPane(panel);
+		    this.pack();
+		    this.setVisible(true);
+		    //this.dispose();	il comando chiude il JFrame
+		}
+		
+		public void posizioneNave() {
+			
+			JTextField cella = new JTextField();
+			String[] opzOrientamento = {"Verticale", "Orizzontale"};
+			JComboBox<String> orientamento = new JComboBox<>(opzOrientamento);
+			
+			JDialog d = new JDialog(this, "Posiziona Nave");
+			
+			JPanel p = new JPanel();
+			p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
+			
+			p.add(new JLabel("Posiziona nave"));
+			p.add(cella);
+			p.add(new JLabel("Scegli l'orientamento"));
+			p.add(orientamento);
+			p.add(new JButton("Ok"));
+			d.add(p);
+			d.setSize(300, 150);
+			d.setVisible(true);
 		}
 		
 		private JPanel generateGrid(int dim, JLabel[][] grid) {
