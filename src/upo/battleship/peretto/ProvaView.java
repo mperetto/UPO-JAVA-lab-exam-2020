@@ -1,10 +1,10 @@
-package upo.battleship;
+package upo.battleship.peretto;
 
 public class ProvaView {
 
 	public static void main(String[] args) {
 		
-		BattleShipView v = new BattleShipView();
+		BattleshipView v = new BattleshipView();
 
 	}
 
