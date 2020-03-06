@@ -10,6 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -54,9 +55,10 @@ public class BattleshipView {
 		JButton btnCaricaPartita, btnGioca;
 		JButton btnPiuSottomarino, btnMenoSottomarino, btnPiuPortaerei, btnMenoPortaerei, btnPiuIncrociatore, btnMenoIncrociatore;
 		JLabel lblNumSottomarini, lblNumPortaerei, lblNumIncrociatori;
+		JCheckBox cbTempo;
 		
 		public SettaggiPartitaView() {
-			super("BattleShip");
+			super("Battleship - settings");
 			
 			JPanel panel = new JPanel();
 			BoxLayout layoutYAxis = new BoxLayout(panel, BoxLayout.Y_AXIS);
@@ -72,6 +74,8 @@ public class BattleshipView {
 			cmbDimGriglia = new JComboBox<>(dimensioni);
 			
 			panel.add(cmbDimGriglia);
+			cbTempo = new JCheckBox("Partita a tempo");
+			panel.add(cbTempo);
 			
 			panel.add(new JLabel("\n"));
 			label = new JLabel("Navi");
@@ -155,9 +159,10 @@ public class BattleshipView {
 		
 		JButton btnSalvaPartita, btnNuovaPartita;
 		private JLabel[][] gridPlayer, gridEnemy;
+		JLabel lblTempo;
 		
 		public GiocoView(int dim) {
-			
+			super("Battleship - game");
 			this.gridEnemy = new JLabel[dim][dim];
 			this.gridPlayer = new JLabel[dim][dim];
 			
@@ -165,6 +170,9 @@ public class BattleshipView {
 			BoxLayout layoutYAxis = new BoxLayout(panel, BoxLayout.Y_AXIS);
 			
 			panel.setLayout(layoutYAxis);
+			panel.add(new JLabel("Tempo Rimasto:"));
+			lblTempo = new JLabel("05:00");
+			panel.add(lblTempo);
 			
 			JPanel panelBoxXAxis = new JPanel();
 			BoxLayout layoutXAxis = new BoxLayout(panelBoxXAxis, BoxLayout.X_AXIS);
@@ -199,8 +207,8 @@ public class BattleshipView {
 			btnNuovaPartita = new JButton("Nuova Partita");
 			panelBoxXAxis.add(btnNuovaPartita);
 			
-			panel.add(panelBoxXAxis);
 			
+			panel.add(panelBoxXAxis);
 			
 		    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		    this.setContentPane(panel);
@@ -215,7 +223,7 @@ public class BattleshipView {
 			String[] opzOrientamento = {"Verticale", "Orizzontale"};
 			JComboBox<String> orientamento = new JComboBox<>(opzOrientamento);
 			
-			JDialog d = new JDialog(this, "Posiziona Nave");
+			JDialog d = new JDialog(this, "Battleship - Posiziona Nave");
 			
 			JPanel p = new JPanel();
 			p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
@@ -235,19 +243,33 @@ public class BattleshipView {
 			//grid = new JLabel[dim][dim];
 			//gridEnemy = grid;
 			JPanel gridPanel = new JPanel();
-			gridPanel.setLayout(new GridLayout(dim, dim));
+			gridPanel.setLayout(new GridLayout(dim+1, dim+1));
 			Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
 			
+			gridPanel.add(new JLabel());
 			for(int i = 0; i < dim; i++) {
-				for(int j = 0; j < dim; j++) {
-					grid[i][j] = new JLabel("");
-					grid[i][j].setPreferredSize(new Dimension(20, 20));
-					grid[i][j].setHorizontalAlignment(JLabel.CENTER);
-					grid[i][j].setVerticalAlignment(JLabel.CENTER);
-					grid[i][j].setOpaque(true);
-					grid[i][j].setBackground(Color.WHITE);
-					grid[i][j].setBorder(border);
-					gridPanel.add(grid[i][j]);
+				Integer intI = i;
+				gridPanel.add(new JLabel(intI.toString()));
+			}
+			
+			for(int i = 0; i < dim; i++) {
+				for(int j = -1; j < dim; j++) {
+					
+					if(j < 0) {
+						Integer inti = (Integer)i;
+						
+						gridPanel.add(new JLabel(inti.toString()));
+					}
+					else {
+						grid[i][j] = new JLabel("");
+						grid[i][j].setPreferredSize(new Dimension(25, 25));
+						grid[i][j].setHorizontalAlignment(JLabel.CENTER);
+						grid[i][j].setVerticalAlignment(JLabel.CENTER);
+						grid[i][j].setOpaque(true);
+						grid[i][j].setBackground(Color.WHITE);
+						grid[i][j].setBorder(border);
+						gridPanel.add(grid[i][j]);
+					}
 				}
 			}
 			
@@ -259,6 +281,11 @@ public class BattleshipView {
 			gridEnemy[2][4].setBackground(Color.DARK_GRAY);
 			gridEnemy[2][5].setBackground(Color.DARK_GRAY);
 			gridEnemy[2][6].setBackground(Color.DARK_GRAY);
+			gridEnemy[4][6].setBackground(Color.red);
+			gridEnemy[4][6].setText("X");
+			gridEnemy[5][6].setBackground(Color.red);
+			gridEnemy[5][6].setText("X");
+			gridEnemy[3][3].setText("X");
 		}
 	}
 	
