@@ -4,8 +4,9 @@ public class ProvaView {
 
 	public static void main(String[] args) {
 		
-		BattleshipView v = new BattleshipView();
-
+		BattleshipModel m = new BattleshipModel();
+		SettingsView v = new SettingsView();
+		BattleshipController c = new BattleshipController(m, v);
 	}
 
 }
