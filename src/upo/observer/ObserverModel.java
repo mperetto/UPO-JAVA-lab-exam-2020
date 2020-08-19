@@ -27,6 +27,12 @@ public class ObserverModel extends Observable {
 		}
 	}
 	
+	public void press(int r, int c) {
+		this.grid[r][c] = 1;
+		this.setChanged();
+		this.notifyObservers(grid);
+	}
+	
 	public void changeGrid() {
 		this.grid[1][1] = 1;
 		this.grid[1][2] = 3;
