@@ -21,7 +21,7 @@ public class GridView extends JPanel implements Observer{
 	
 	JButton btnTest;
 	JButton btnSalvaPartita, btnNuovaPartita;
-	private JLabel[][] gridPlayer, gridEnemy;
+	JLabel[][] gridPlayer, gridEnemy;
 	JLabel lblTempo;
 	
 	//public GridView(ObserverController c, ObserverModel m) {
@@ -74,6 +74,7 @@ public class GridView extends JPanel implements Observer{
 					grid[i][j].setOpaque(true);
 					grid[i][j].setBackground(Color.WHITE);
 					grid[i][j].setBorder(border);
+					grid[i][j].setName(i+";"+j);
 					gridPanel.add(grid[i][j]);
 				}
 			}
