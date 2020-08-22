@@ -29,7 +29,7 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		
 		while(dim > 0) {
 			
-			if(this.grid[row][col] != 0) {
+			if(this.grid[row][col] != CellStatus.CELL_EMPTY) {
 				throw new IndexOutOfBoundsException("Impossibile posizionare nave cella già occupata");
 			}
 			
@@ -50,6 +50,16 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 	}
 	
 	public void hitCell(int row, int col) throws IndexOutOfBoundsException {
+		
+		if(row < 0 || row >= this.gridRows || col < 0 || col >= this.gridCols) {
+			throw new IndexOutOfBoundsException("La cella non esiste nella mappa di gioco");
+		}
+		
+		switch(this.grid[row][col]) {
+			case CELL_EMPTY: this.grid[row][col] = CellStatus.CELL_EMPTY_HIT; break;
+			case CELL_SHIP: this.grid[row][col] = CellStatus.CELL_SHIP_HIT; break;
+			default:;
+		}
 		
 	}
 	
