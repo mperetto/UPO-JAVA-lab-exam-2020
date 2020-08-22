@@ -5,16 +5,16 @@ import java.util.Observable;
 
 public abstract class GridModel extends Observable implements GridShipsModel {
 	
-	protected int[][] grid;
+	protected CellStatus[][] grid;
 	private int gridRows, gridCols;
 	
 	public GridModel(int rows, int cols) {
-		this.grid = new int[rows][cols];
+		this.grid = new CellStatus[rows][cols];
 		this.gridRows = rows;
 		this.gridCols = cols;
 		
-		for(int[] row : this.grid) {
-			Arrays.fill(row, 0);
+		for(CellStatus[] row : this.grid) {
+			Arrays.fill(row, CellStatus.CELL_EMPTY);
 		}
 	}
 	
