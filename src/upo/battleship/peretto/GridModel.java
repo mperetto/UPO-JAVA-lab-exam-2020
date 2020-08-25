@@ -58,9 +58,39 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		switch(this.grid[row][col]) {
 			case CELL_EMPTY: this.grid[row][col] = CellStatus.CELL_EMPTY_HIT; break;
 			case CELL_SHIP: this.grid[row][col] = CellStatus.CELL_SHIP_HIT; break;
-			default:;
+			default:
+				break;
 		}
 		
+		CellStatus[][] filteredGrid = FilterGrid();
+		
+		this.setChanged();
+		this.notifyObservers(filteredGrid);
+		
+	}
+	
+	/**
+	 * Filtra la griglia nascondendo il posizionamento delle navi non colpite,
+	 * 
+	 * @return una nuova griglia filtrata
+	 * */
+	private CellStatus[][] FilterGrid() {
+		
+		CellStatus[][] g = new CellStatus[this.gridRows][this.gridCols];
+		
+		for(int i = 0; i < this.gridRows; i++) {
+			for(int j = 0; j < this.gridCols; j++){
+				
+				switch(this.grid[i][j]){
+					case CELL_EMPTY_HIT: g[i][j] = this.grid[i][j]; break;
+					case CELL_SHIP_HIT: g[i][j] = this.grid[i][j]; break;
+					default:
+						break;
+				}
+			}
+		}
+		
+		return g;
 	}
 	
 }
