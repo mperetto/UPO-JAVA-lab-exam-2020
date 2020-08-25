@@ -6,7 +6,7 @@ import java.util.Observable;
 public abstract class GridModel extends Observable implements GridShipsModel {
 	
 	protected CellStatus[][] grid;
-	private int gridRows, gridCols;
+	protected int gridRows, gridCols;
 	
 	public GridModel(int rows, int cols) {
 		this.grid = new CellStatus[rows][cols];
