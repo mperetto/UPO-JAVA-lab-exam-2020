@@ -1,5 +1,46 @@
 package upo.battleship.peretto;
 
-public class GridAIModel {
+import java.lang.Math;
+import java.util.Observable;
+import java.util.Observer; 
+
+public class GridAIModel extends GridModel implements Observer {
+	
+	private CellStatus[][] enemyGrid;
+
+	public GridAIModel(int rows, int cols) {
+		super(rows, cols);
+		this.enemyGrid = new CellStatus[rows][cols];
+	}
+	
+	/**
+	 * Restituisce le cordinate della cella da colpire
+	 * 
+	 * @return cell, cella da colpire all'interno della griglia del player
+	 * 
+	 * */
+	public int[] NewMove() {
+		
+		int range = this.gridCols; // numeri da 0 a numero di colonne/righe della matrice
+		int[] cell = new int[2];
+		
+		cell[0] = (int)Math.random()*range;
+		cell[1] = (int)Math.random()*range;
+		
+		return cell;
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		
+		CellStatus[][] g = (CellStatus[][])arg1;
+		
+		for(int i = 0; i < this.gridRows; i++){
+			for(int j = 0; j < this.gridCols; j++){
+				this.enemyGrid[i][j] = g[i][j];
+			}
+		}
+		
+	}
 
 }
