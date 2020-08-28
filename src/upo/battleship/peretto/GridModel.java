@@ -20,32 +20,58 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 	
 	public void placeShip(int row, int col, ShipOrientation orientation, int dim) throws IndexOutOfBoundsException {
 		
-		this.gridRows = grid.length;
-		this.gridCols = grid[0].length;
+		/*this.gridRows = grid.length;
+		this.gridCols = grid[0].length;*/
 		
 		if(row < 0 || row >= gridRows || col < 0 || col >= gridCols) {
 			throw new IndexOutOfBoundsException("La cella non esiste all'interno della griglia");
 		}
 		
-		while(dim > 0) {
+		switch(orientation) {//	Controllo se la nave può essere posizionata all'ìnterno della griglia
+			case HORIZONTAL: {
+				if(gridCols < col+dim) {
+					throw new IndexOutOfBoundsException("Impossibile posizionare nave, esce dalla mappa di gioco");
+				}
+				int i = dim, c = col;
+				while(i > 0){
+					if(this.grid[row][c] != CellStatus.CELL_EMPTY) {
+						throw new IndexOutOfBoundsException("Impossibile posizionare nave cella già occupata");
+					}
+					i--;
+					c++;
+				}
+			} break;
 			
-			if(this.grid[row][col] != CellStatus.CELL_EMPTY) {
-				throw new IndexOutOfBoundsException("Impossibile posizionare nave cella già occupata");
-			}
+			case VERTICAL: {
+				if(gridRows < row+dim) {
+					throw new IndexOutOfBoundsException("Impossibile posizionare nave, esce dalla mappa di gioco");
+				}
+				int i = dim, r = row;
+				while(i > 0){
+					if(this.grid[row][r] != CellStatus.CELL_EMPTY) {
+						throw new IndexOutOfBoundsException("Impossibile posizionare nave cella già occupata");
+					}
+					i--;
+					r++;
+				}
+			} break;
+		}
+		
+		while(dim > 0) {//	posiziono la nave all'interno della griglia
 			
 			if(orientation == ShipOrientation.HORIZONTAL) {
+				this.grid[row][col] = CellStatus.CELL_SHIP;
 				col++;
 			}
 			else {
+				this.grid[row][col] = CellStatus.CELL_SHIP;
 				row++;
-			}
-			
-			if(row >= gridRows || col >= gridCols) {
-				throw new IndexOutOfBoundsException("Impossibile posizionare nave, esce dalla mappa di gioco");
 			}
 			
 			dim--;
 		}
+		this.setChanged();
+		this.notifyObservers();
 		
 	}
 	
