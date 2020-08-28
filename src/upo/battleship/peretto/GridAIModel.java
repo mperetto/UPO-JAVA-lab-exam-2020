@@ -7,10 +7,13 @@ import java.util.Observer;
 public class GridAIModel extends GridModel implements Observer {
 	
 	private CellStatus[][] enemyGrid;
+	private GridPlayerModel playerModel;
 
-	public GridAIModel(int rows, int cols) {
+	public GridAIModel(int rows, int cols, GridPlayerModel playerModel) {
 		super(rows, cols);
 		this.enemyGrid = new CellStatus[rows][cols];
+		this.playerModel = playerModel;
+		this.playerModel.addObserver(this);
 	}
 	
 	/**
