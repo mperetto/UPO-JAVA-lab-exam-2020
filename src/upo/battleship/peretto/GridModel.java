@@ -119,4 +119,20 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		return g;
 	}
 	
+	/*
+	 * DEBUG USE ONLY
+	 * */
+	protected void printGrid(String gridName, CellStatus[][] grid) {
+		
+		System.out.println("Stato griglia: "+gridName);
+		
+		for(int i = 0; i < grid.length; i++){
+			for(int j = 0; j < grid[0].length; j++){
+				System.out.print(grid[i][j]+" | ");
+			}
+			System.out.println();
+		}
+		
+	}
+	
 }
