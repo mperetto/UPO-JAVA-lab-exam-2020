@@ -1,34 +1,23 @@
 package upo.battleship.peretto;
 
-import java.util.Observable;
-import java.util.Observer;
-
-public class GridPlayerModel extends GridModel implements Observer{
-	
-	private CellStatus[][] enemyGrid;
-	private GridAIModel aiModel;
+public class GridPlayerModel extends GridModel {
 	
 	/**
 	 * Inizializza una nuova griglia
 	 * */
-	public GridPlayerModel(int rows, int cols, GridAIModel aiModel) {
+	public GridPlayerModel(int rows, int cols) {
 		super(rows, cols);
-		this.enemyGrid = new CellStatus[rows][cols];
-		this.aiModel = aiModel;
-		this.aiModel.addObserver(this);
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
+	/*@Override
+	public void hitCell(int row, int col) throws IndexOutOfBoundsException {
 		
-		CellStatus[][] g = (CellStatus[][])arg;
-		
-		for(int i = 0; i < this.gridRows; i++){
-			for(int j = 0; j < this.gridCols; j++){
-				this.enemyGrid[i][j] = g[i][j];
-			}
-		}
-		
-	}
+	}*/
+	
+	public void changeMessage(String message) 
+    {
+        setChanged();
+        notifyObservers(message);
+    }
 
 }
