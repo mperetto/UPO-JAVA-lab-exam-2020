@@ -22,7 +22,7 @@ public class GridAIModel extends GridModel implements Observer {
 	 * @return cell, cella da colpire all'interno della griglia del player
 	 * 
 	 * */
-	public int[] NewMove() {
+	public int[] newMove() {
 		
 		int range = this.gridCols; // numeri da 0 a numero di colonne/righe della matrice
 		int[] cell = new int[2];
