@@ -18,6 +18,13 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		}
 	}
 	
+	
+	/*
+	 * !!!!!!!!!!!!!!! IMPORTANT  !!!!!!!!!!!!!!
+	 * 
+	 * Le navi non possono toccarsi, implementare controllo
+	 * */
+	
 	public void placeShip(int row, int col, ShipOrientation orientation, int dim) throws IndexOutOfBoundsException {
 		
 		/*this.gridRows = grid.length;
@@ -29,13 +36,16 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		
 		switch(orientation) {//	Controllo se la nave può essere posizionata all'ìnterno della griglia
 			case HORIZONTAL: {
-				if(gridCols < col+dim) {
+				if(gridCols < (col+dim)) {
+					System.out.println("1");
 					throw new IndexOutOfBoundsException("Impossibile posizionare nave, esce dalla mappa di gioco");
+					
 				}
 				int i = dim, c = col;
 				while(i > 0){
 					if(this.grid[row][c] != CellStatus.CELL_EMPTY) {
-						throw new IndexOutOfBoundsException("Impossibile posizionare nave cella già occupata");
+						System.out.println("2");
+						throw new IndexOutOfBoundsException("Impossibile posizionare nave, cella già occupata");
 					}
 					i--;
 					c++;
@@ -44,12 +54,14 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 			
 			case VERTICAL: {
 				if(gridRows < row+dim) {
+					System.out.println("3");
 					throw new IndexOutOfBoundsException("Impossibile posizionare nave, esce dalla mappa di gioco");
 				}
 				int i = dim, r = row;
 				while(i > 0){
-					if(this.grid[row][r] != CellStatus.CELL_EMPTY) {
-						throw new IndexOutOfBoundsException("Impossibile posizionare nave cella già occupata");
+					if(this.grid[r][col] != CellStatus.CELL_EMPTY) {
+						System.out.println("4");
+						throw new IndexOutOfBoundsException("Impossibile posizionare nave, cella già occupata");
 					}
 					i--;
 					r++;
