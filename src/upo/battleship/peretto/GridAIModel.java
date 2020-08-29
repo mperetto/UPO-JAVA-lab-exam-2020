@@ -27,8 +27,10 @@ public class GridAIModel extends GridModel implements Observer {
 		int range = this.gridCols; // numeri da 0 a numero di colonne/righe della matrice
 		int[] cell = new int[2];
 		
-		cell[0] = (int)Math.random()*range;
-		cell[1] = (int)Math.random()*range;
+		do{
+			cell[0] = (int)Math.random()*range;
+			cell[1] = (int)Math.random()*range;
+		}while(this.enemyGrid[cell[0]][cell[1]] != CellStatus.CELL_EMPTY);		
 		
 		return cell;
 	}
