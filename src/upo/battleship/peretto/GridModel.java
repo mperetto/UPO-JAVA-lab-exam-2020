@@ -19,12 +19,9 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 	}
 	
 	
-	/*
-	 * !!!!!!!!!!!!!!! IMPORTANT  !!!!!!!!!!!!!!
-	 * 
-	 * Le navi non possono toccarsi, implementare controllo
-	 * */
-	
+	/**
+	 * {@inheritDoc}
+	 * */	
 	public void placeShip(int row, int col, ShipOrientation orientation, int dim) throws IndexOutOfBoundsException {
 		
 		/*this.gridRows = grid.length;
@@ -43,7 +40,7 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 				}
 				int i = dim, c = col;
 				while(i > 0){
-					if(this.grid[row][c] != CellStatus.CELL_EMPTY) {
+					if(this.grid[row][c] != CellStatus.CELL_EMPTY || !isNeighborCellEmpty(this.grid, row, c)) {
 						System.out.println("2");
 						throw new IndexOutOfBoundsException("Impossibile posizionare nave, cella già occupata");
 					}
@@ -59,7 +56,7 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 				}
 				int i = dim, r = row;
 				while(i > 0){
-					if(this.grid[r][col] != CellStatus.CELL_EMPTY) {
+					if(this.grid[r][col] != CellStatus.CELL_EMPTY || !isNeighborCellEmpty(this.grid, r, col)) {
 						System.out.println("4");
 						throw new IndexOutOfBoundsException("Impossibile posizionare nave, cella già occupata");
 					}
@@ -84,6 +81,45 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		}
 		this.setChanged();
 		this.notifyObservers();
+		
+	}
+	
+	private CellStatus getCellValue(CellStatus[][] grid, int r, int c) {
+		
+		CellStatus value = null;
+		
+		try{
+			value = grid[r][c];
+		}
+		catch (IndexOutOfBoundsException e){
+			return null;
+		}
+		
+		return value;
+		
+	}
+	
+	private boolean isNeighborCellEmpty(CellStatus[][] grid, int r, int c) {
+		
+		CellStatus[] neighborCell = new CellStatus[8];
+		
+		neighborCell[0] = getCellValue(grid, r-1, c);// Cella in alto
+		neighborCell[1] = getCellValue(grid, r-1, c+1);// Cella in alto a destra
+		neighborCell[2] = getCellValue(grid, r, c+1);// Cella a destra
+		neighborCell[3] = getCellValue(grid, r+1, c+1);// Cella in basso a destra
+		neighborCell[4] = getCellValue(grid, r+1, c);// Cella in basso
+		neighborCell[5] = getCellValue(grid, r+1, c-1);// Cella in basso a sinistra
+		neighborCell[6] = getCellValue(grid, r, c-1);// Cella a sinistra
+		neighborCell[7] = getCellValue(grid, r-1, c-1);// Cella in alto a sinistra
+		
+		for(int i = 0; i < neighborCell.length; i++){
+			
+			if(neighborCell[i] != null && neighborCell[i] != CellStatus.CELL_EMPTY)
+				return false;
+			
+		}
+		
+		return true;
 		
 	}
 	
