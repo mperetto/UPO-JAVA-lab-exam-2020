@@ -2,9 +2,7 @@ package upo.battleship.peretto;
 
 import static org.junit.Assert.*;
 
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -12,6 +10,7 @@ public class GridAIModelTest {
 	
 	GridPlayerModel playerModel;
 	GridAIModel aiModel;
+	
 	
 	@Before
 	public void setup() {
@@ -55,40 +54,35 @@ public class GridAIModelTest {
 			System.out.println("t6");
 		}
 		catch (IndexOutOfBoundsException e) {
-			assertEquals("Posizionamento navi nella grilgia fallito: "+e.getMessage(), true, false);
+			fail("Posizionamento navi nella grilgia fallito: "+e.getMessage());
+		}
+		catch(Exception e){
+			fail("Posizionamento navi nella griglia fallito con eccezzione: "+e.toString());
 		}
 		
 		try{
 			this.aiModel.placeShip(3, 7, ShipOrientation.HORIZONTAL, 4);
-			assertEquals("Il posizionamento della nave doveva fallire", true, false);
+			fail("Il posizionamento della nave doveva fallire, nave esce dalla griglia in orizzontale");
 		}
-		catch (IndexOutOfBoundsException e) {
-			assertEquals("Posizionamento navi nella grilgia fallito: "+e.getMessage(), true, true);
-		}
+		catch (IndexOutOfBoundsException e) {}
 		
 		try{
 			this.aiModel.placeShip(8, 6, ShipOrientation.VERTICAL, 4);
-			assertEquals("Il posizionamento della nave doveva fallire", true, false);
+			fail("Il posizionamento della nave doveva fallire, nave esce dalla griglia in verticale");
 		}
-		catch (IndexOutOfBoundsException e) {
-			assertEquals("Posizionamento navi nella grilgia fallito: "+e.getMessage(), true, true);
-		}
+		catch (IndexOutOfBoundsException e) {}
 		
 		try{
 			this.aiModel.placeShip(8, 6, ShipOrientation.HORIZONTAL, 4);
-			assertEquals("Il posizionamento della nave doveva fallire", true, false);
+			fail("Il posizionamento della nave doveva fallire, nave occupa posizione di altra nave presente");
 		}
-		catch (IndexOutOfBoundsException e) {
-			assertEquals("Posizionamento navi nella grilgia fallito: "+e.getMessage(), true, true);
-		}
+		catch (IndexOutOfBoundsException e) {}
 		
 		try{
 			this.aiModel.placeShip(1, 8, ShipOrientation.VERTICAL, 4);
-			assertEquals("Il posizionamento della nave doveva fallire", true, false);
+			fail("Il posizionamento della nave doveva fallire, le navi non possono toccarsi.");
 		}
-		catch (IndexOutOfBoundsException e) {
-			assertEquals("Posizionamento navi nella grilgia fallito: "+e.getMessage(), true, true);
-		}
+		catch (IndexOutOfBoundsException e) {}
 	}
 
 	@Test
