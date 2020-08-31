@@ -77,6 +77,12 @@ public class GridAIModelTest {
 			fail("Il posizionamento della nave doveva fallire, le navi non possono toccarsi.");
 		}
 		catch (IndexOutOfBoundsException e) {}
+		
+		try{
+			this.aiModel.placeShip(10, 10, ShipOrientation.HORIZONTAL, 4);
+			fail("Il posizionamento della nave doveva fallire, nave esce dalla griglia in orizzontale");
+		}
+		catch (IndexOutOfBoundsException e) {}
 	}
 
 	@Test
