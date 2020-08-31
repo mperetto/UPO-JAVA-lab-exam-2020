@@ -81,7 +81,51 @@ public class GridAIModelTest {
 
 	@Test
 	public void testHitCell() {
-		fail("Not yet implemented");
+		try{
+			this.aiModel.placeShip(1, 3, ShipOrientation.HORIZONTAL, 5);
+			this.aiModel.placeShip(6, 3, ShipOrientation.HORIZONTAL, 4);
+			this.aiModel.placeShip(9, 0, ShipOrientation.HORIZONTAL, 3);
+			this.aiModel.placeShip(2, 0, ShipOrientation.VERTICAL, 5);
+			this.aiModel.placeShip(1, 9, ShipOrientation.VERTICAL, 3);
+			this.aiModel.placeShip(5, 9, ShipOrientation.VERTICAL, 4);
+		}
+		catch (IndexOutOfBoundsException e) {
+			fail("Posizionamento navi nella grilgia fallito: "+e.getMessage());
+		}
+		
+		try{
+			this.aiModel.hitCell(-1, 2);
+			fail("Il colpo doveva fallire, riga matrice fornita negativa");
+		}
+		catch (IndexOutOfBoundsException e){}
+		
+		try{
+			this.aiModel.hitCell(1, -2);
+			fail("Il colpo doveva fallire, colonna matrice fornita negativa");
+		}
+		catch (IndexOutOfBoundsException e){}
+		
+		try{
+			this.aiModel.hitCell(-1, -2);
+			fail("Il colpo doveva fallire, riga e colonna matrice fornite negative");
+		}
+		catch (IndexOutOfBoundsException e){}
+		
+		try{
+			this.aiModel.hitCell(10, 10);
+			fail("Il colpo doveva fallire, riga e colonna matrice fornite fuori range");
+		}
+		catch (IndexOutOfBoundsException e){}
+		
+		for(int i = 0; i < 10; i++){
+			for(int j = 0; j < 10; j++){
+				try{
+					this.aiModel.hitCell(i, j);
+				}
+				catch (Exception e){
+					fail("Test fallito alla cella ("+i+";"+j+"): "+e.toString());
+				}
+			}
+		}
 	}
-
 }
