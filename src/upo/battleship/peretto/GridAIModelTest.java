@@ -41,17 +41,11 @@ public class GridAIModelTest {
 		
 		try{
 			this.aiModel.placeShip(1, 3, ShipOrientation.HORIZONTAL, 5);
-			System.out.println("t1");
 			this.aiModel.placeShip(6, 3, ShipOrientation.HORIZONTAL, 4);
-			System.out.println("t2");
 			this.aiModel.placeShip(9, 0, ShipOrientation.HORIZONTAL, 3);
-			System.out.println("t3");
 			this.aiModel.placeShip(2, 0, ShipOrientation.VERTICAL, 5);
-			System.out.println("t4");
 			this.aiModel.placeShip(1, 9, ShipOrientation.VERTICAL, 3);
-			System.out.println("t5");
 			this.aiModel.placeShip(5, 9, ShipOrientation.VERTICAL, 4);
-			System.out.println("t6");
 		}
 		catch (IndexOutOfBoundsException e) {
 			fail("Posizionamento navi nella grilgia fallito: "+e.getMessage());
