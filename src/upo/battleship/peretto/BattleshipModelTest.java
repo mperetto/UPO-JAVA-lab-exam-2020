@@ -36,12 +36,12 @@ public class BattleshipModelTest {
 
 	@Test
 	public void testGetGridPlayerModel() {
-		fail("Not yet implemented");
+		assert(this.model.getGridPlayerModel() != null && this.model.getGridPlayerModel() instanceof GridPlayerModel);
 	}
 
 	@Test
 	public void testGetGridAIModel() {
-		fail("Not yet implemented");
+		assert(this.model.getGridAIModel() != null && this.model.getGridAIModel() instanceof GridAIModel);
 	}
 
 }
