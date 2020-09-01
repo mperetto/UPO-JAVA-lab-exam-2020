@@ -4,6 +4,7 @@ public class BattleshipModel {
 	
 	protected int dimGrid;
 	protected int numSottomarini, numPortaerei, numIncrociatori;
+	protected int numSottIns, numPortIns, numIncrIns;
 	private GridPlayerModel playerModel;
 	private GridAIModel aiModel;
 	
@@ -23,6 +24,10 @@ public class BattleshipModel {
 		this.dimGrid = dimGrid;
 		this.playerModel = new GridPlayerModel(dimGrid, dimGrid);
 		this.aiModel = new GridAIModel(dimGrid, dimGrid, this.playerModel);
+		
+		this.numSottIns = 0;
+		this.numPortIns = 0;
+		this.numIncrIns = 0;
 	}
 	
 	/**
@@ -32,6 +37,10 @@ public class BattleshipModel {
 	 * @throws IllegalStateException in caso la nave non possa essere posizionata
 	 * */
 	public void addShip(ShipModel s) throws IllegalStateException {
+		
+		if(isFullOf(s.getType())){
+			throw new IllegalStateException("Impossibile posizionare nave, limite massimo raggiunto");
+		}
 		
 		try{
 			this.playerModel.placeShip(
@@ -45,6 +54,36 @@ public class BattleshipModel {
 			throw new IllegalStateException("Impossibile posizionare la nave. ERRORE: "+e.toString());
 		}
 		
+		switch(s.getType()) {
+			case SOTTOMARINO: numSottIns++; break;
+			case PORTAEREI: numPortIns++; break;
+			case INCROCIATORE: numIncrIns++; break;
+		}
+		
+	}
+	
+	/**
+	 * Controlla se ho già raggiunto il limite massimo di navi che possono essere presenti nella griglia di gioco
+	 * 
+	 * @param ShipType tipo di nave su cui devo effettuare il controllo
+	 * @return <code>true</code> se ho raggiunto il limite di navi <code>false</code> altrimenti
+	 * */
+	private boolean isFullOf(ShipType sT) {
+		boolean full = false;
+		
+		switch(sT){
+			case SOTTOMARINO: {
+				full = numSottIns >= numSottomarini;
+			}; break;
+			case PORTAEREI: {
+				full = numPortIns >= numPortaerei;
+			}; break;
+			case INCROCIATORE: {
+				full = numIncrIns >= numIncrociatori;
+			}; break;
+		}
+		
+		return full;
 	}
 	
 	/**
