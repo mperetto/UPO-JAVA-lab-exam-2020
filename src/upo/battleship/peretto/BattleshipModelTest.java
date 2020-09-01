@@ -33,6 +33,46 @@ public class BattleshipModelTest {
 		}
 		
 	}
+	
+	@Test
+	public void testAddShipOverLimit() {
+		
+		try{
+			model.addShip(new ShipModel(1, 9, ShipType.SOTTOMARINO, ShipOrientation.VERTICAL));
+			model.addShip(new ShipModel(9, 0, ShipType.SOTTOMARINO, ShipOrientation.HORIZONTAL));
+			model.addShip(new ShipModel(3, 0, ShipType.SOTTOMARINO, ShipOrientation.HORIZONTAL));
+			fail("Errore Superato limite di sottomarini inseribili");
+		}
+		catch(IllegalStateException e){}
+		
+		model = new BattleshipModel(10, 2, 2, 2);
+		
+		try{
+			model.addShip(new ShipModel(1, 9, ShipType.PORTAEREI, ShipOrientation.VERTICAL));
+			model.addShip(new ShipModel(9, 0, ShipType.PORTAEREI, ShipOrientation.HORIZONTAL));
+			model.addShip(new ShipModel(3, 0, ShipType.PORTAEREI, ShipOrientation.HORIZONTAL));
+			fail("Errore Superato limite di portaerei inseribili");
+		}
+		catch(IllegalStateException e){}
+		
+		model = new BattleshipModel(10, 2, 2, 2);
+		
+		try{
+			model.addShip(new ShipModel(1, 9, ShipType.INCROCIATORE, ShipOrientation.VERTICAL));
+			model.addShip(new ShipModel(9, 0, ShipType.INCROCIATORE, ShipOrientation.HORIZONTAL));
+			model.addShip(new ShipModel(3, 0, ShipType.INCROCIATORE, ShipOrientation.HORIZONTAL));
+			fail("Errore Superato limite di incrociatori inseribili");
+		}
+		catch(IllegalStateException e){}
+		
+		model = new BattleshipModel(10, 2, 2, 0);
+		
+		try{
+			model.addShip(new ShipModel(1, 9, ShipType.INCROCIATORE, ShipOrientation.VERTICAL));
+			fail("Errore Superato limite di incrociatori inseribili");
+		}
+		catch(IllegalStateException e){}
+	}
 
 	@Test
 	public void testGetGridPlayerModel() {
