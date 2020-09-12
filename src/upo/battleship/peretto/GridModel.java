@@ -153,6 +153,10 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		
 		CellStatus[][] g = new CellStatus[this.gridRows][this.gridCols];
 		
+		for(CellStatus[] row : g) {
+			Arrays.fill(row, CellStatus.CELL_EMPTY);
+		}
+		
 		for(int i = 0; i < this.gridRows; i++) {
 			for(int j = 0; j < this.gridCols; j++){
 				
