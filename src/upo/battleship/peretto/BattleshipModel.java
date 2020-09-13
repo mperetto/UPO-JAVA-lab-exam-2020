@@ -87,6 +87,28 @@ public class BattleshipModel {
 	}
 	
 	/**
+	 * Controlla se un giocatore ha affondato tutte le navi nemiche
+	 * 
+	 * @return int 0 (nessun vincitore), 1 (vincitore Player), 2 (vincitore AI)
+	 * */
+	public int checkWin() {
+		
+		int naviAffPlayer = playerModel.getNaviAffondate();
+		int naviAffAI = aiModel.getNaviAffondate();
+		int totNavi = this.numIncrociatori + this.numPortaerei + this.numSottomarini;
+		
+		if(naviAffPlayer == totNavi){
+			return 1;
+		}
+		else if(naviAffAI == totNavi){
+			return 2;
+		}
+		else{
+			return 0;
+		}
+	}
+	
+	/**
 	 * Restituisce oggetto di tipo GridPlayerModel istanziato
 	 * 
 	 * @return GridPlayerModel oggetto istanziato
