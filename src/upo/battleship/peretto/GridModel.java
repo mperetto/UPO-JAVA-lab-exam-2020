@@ -7,6 +7,7 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 	
 	protected CellStatus[][] grid;
 	protected int gridRows, gridCols;
+	private int totNaviAffondate;
 	
 	public GridModel(int rows, int cols) {
 		this.grid = new CellStatus[rows][cols];
@@ -170,6 +171,15 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		}
 		
 		return g;
+	}
+	
+	/**
+	 * Restituisce il numero di navi nemiche affondate fino a quel momento.
+	 * 
+	 * @return int il totale delle navi affondate.
+	 * */
+	public int getNaviAffondate() {
+		return this.totNaviAffondate;
 	}
 	
 	/*
