@@ -86,7 +86,7 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		
 	}
 	
-	protected CellStatus getCellValue(CellStatus[][] grid, int r, int c) {
+	public static CellStatus getCellValue(CellStatus[][] grid, int r, int c) {
 		
 		CellStatus value = null;
 		
