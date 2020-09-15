@@ -62,6 +62,12 @@ class AI {
 	private int estrNaveInd;
 	private boolean affondata;
 	
+	private enum stateLevel{
+		NAVE_NON_IND,
+		CERCO_ORIENTAMENTO,
+		TROVATO_ORIENTAMENTO
+	}
+	
 	public AI(CellStatus[][] g) {
 		enemyGrid = g;
 		naveIndividuata = false;
@@ -105,14 +111,57 @@ class AI {
 		}
 		
 		if(!naveIndividuata) {
+			
 			int[] cella = generaCellaCasuale();
 			
 			cellaPrecColpita[0] = cella[0];
 			cellaPrecColpita[1] = cella[1];
 			
+			return cella;
 		}
 		else {
-			
+			if(orientamento != null){
+				// ho l'orientamento colpisco lungo una direzione
+			}
+			else{
+				
+				CellStatus[] celleAdj = getCellAdj(cellaConNavePrecColpita[0], cellaConNavePrecColpita[1]);
+				
+				for(int i = 0; i < celleAdj.length; i++){
+					if(celleAdj[i] == CellStatus.CELL_EMPTY){
+						int[] cella = new int[2];
+						switch(i) {
+						
+							case 0: {// cella Nord
+								cella[0] = cellaConNavePrecColpita[0] - 1;
+								cella[1] = cellaConNavePrecColpita[1];
+							} break;
+							
+							case 1: {// cella Est
+								cella[0] = cellaConNavePrecColpita[0];
+								cella[1] = cellaConNavePrecColpita[1] + 1;
+							} break;
+							
+							case 2: {// cella Sud
+								cella[0] = cellaConNavePrecColpita[0] + 1;
+								cella[1] = cellaConNavePrecColpita[1];
+							} break;
+							
+							case 3: {// cella Ovest
+								cella[0] = cellaConNavePrecColpita[0];
+								cella[1] = cellaConNavePrecColpita[1] - 1;
+							} break;
+							
+						}
+						
+						cellaPrecColpita[0] = cella[0];
+						cellaPrecColpita[1] = cella[1];
+						
+						return cella;
+					}
+				}
+				
+			}
 		}
 		
 		return null;
@@ -129,6 +178,27 @@ class AI {
 		}while(this.enemyGrid[cell[0]][cell[1]] != CellStatus.CELL_EMPTY);		
 		
 		return cell;
+	}
+	
+	/*
+	 * Restituisce lo stato delle 4 celle adiacenti alla cella data (Nord, Est, Sud, Ovest)
+	 * 
+	 * @param r riga cella
+	 * @param c colonna cella
+	 * 
+	 * @return vettore contenente stato 4 celle adiacenti
+	 * */
+	private CellStatus[] getCellAdj(int r, int c) {
+		
+		CellStatus[] cAdj = new CellStatus[4];
+		
+		cAdj[0] = GridModel.getCellValue(enemyGrid, r-1, c);
+		cAdj[1] = GridModel.getCellValue(enemyGrid, r, c+1);
+		cAdj[2] = GridModel.getCellValue(enemyGrid, r+1, c);
+		cAdj[3] = GridModel.getCellValue(enemyGrid, r, c-1);
+		
+		return cAdj;
+		
 	}
 	
 }
