@@ -7,6 +7,7 @@ import java.util.Observer;
 public class GridAIModel extends GridModel implements Observer {
 	
 	private CellStatus[][] enemyGrid;
+	protected CellStatus[][] enemyGrid;
 	private GridPlayerModel playerModel;
 
 	public GridAIModel(int rows, int cols, GridPlayerModel playerModel) {
@@ -39,6 +40,9 @@ public class GridAIModel extends GridModel implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		
 		CellStatus[][] g = (CellStatus[][])arg1;
+		if(arg0 instanceof GridAIModel){
+			System.out.println("istanza GridPlayer");
+		}
 		
 		for(int i = 0; i < this.gridRows; i++){
 			for(int j = 0; j < this.gridCols; j++){
