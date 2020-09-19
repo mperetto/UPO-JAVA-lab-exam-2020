@@ -61,6 +61,7 @@ class AI {
 	private ShipOrientation orientamento;
 	private int estrNaveInd;
 	private boolean affondata;
+	private stateLevel stato;
 	
 	private enum stateLevel{
 		NAVE_NON_IND,
@@ -82,6 +83,7 @@ class AI {
 		orientamento = null;
 		estrNaveInd = 0;
 		affondata = false;
+		stato = stateLevel.NAVE_NON_IND;
 	}
 	
 	public int[] colpisci() {
@@ -127,6 +129,48 @@ class AI {
 				
 				CellStatus[] celleAdj = getCellAdj(cellaConNavePrecColpita[0], cellaConNavePrecColpita[1]);
 				
+				if(stato == stateLevel.CERCO_ORIENTAMENTO){
+					
+					CellStatus[] statoCelle = getCellAdj(cellaConNavePrecColpita[0], cellaConNavePrecColpita[1]);
+					
+					if(
+						(statoCelle[0] == null || statoCelle[0] == CellStatus.CELL_EMPTY_HIT) && 
+						(statoCelle[2] == null || statoCelle[2] == CellStatus.CELL_EMPTY_HIT)
+					){
+						orientamento = ShipOrientation.HORIZONTAL;
+						
+						if(statoCelle[1] == null || statoCelle[1] == CellStatus.CELL_EMPTY_HIT){
+							estrNaveInd += 1;
+						}
+					}
+					else if(
+							(statoCelle[1] == null || statoCelle[1] == CellStatus.CELL_EMPTY_HIT) && 
+							(statoCelle[3] == null || statoCelle[3] == CellStatus.CELL_EMPTY_HIT)
+						){
+						
+						orientamento = ShipOrientation.VERTICAL;
+						
+						if(statoCelle[0] == null || statoCelle[0] == CellStatus.CELL_EMPTY_HIT){
+							estrNaveInd += 1;
+						}
+					}
+					
+					if(orientamento == null){
+						if(
+							(cellaConNavePrecColpita[0] != primaCellaColpita[0]) ||
+							(cellaConNavePrecColpita[1] != primaCellaColpita[1])
+						){
+							if(cellaConNavePrecColpita[0] != primaCellaColpita[0]){
+								orientamento = ShipOrientation.VERTICAL;
+							}
+							else if(cellaConNavePrecColpita[1] != primaCellaColpita[1]){
+								orientamento = ShipOrientation.HORIZONTAL;
+							}
+						}
+					}
+					
+				}
+				
 				for(int i = 0; i < celleAdj.length; i++){
 					if(celleAdj[i] == CellStatus.CELL_EMPTY){
 						int[] cella = new int[2];
@@ -156,6 +200,8 @@ class AI {
 						
 						cellaPrecColpita[0] = cella[0];
 						cellaPrecColpita[1] = cella[1];
+						
+						stato = stateLevel.CERCO_ORIENTAMENTO;
 						
 						return cella;
 					}
