@@ -66,7 +66,8 @@ class AI {
 	private enum stateLevel{
 		NAVE_NON_IND,
 		CERCO_ORIENTAMENTO,
-		TROVATO_ORIENTAMENTO
+		TROVATO_ORIENTAMENTO,
+		CERCO_ESTREMITA
 	}
 	
 	public AI(CellStatus[][] g) {
@@ -123,7 +124,63 @@ class AI {
 		}
 		else {
 			if(orientamento != null){
-				// ho l'orientamento colpisco lungo una direzione
+				
+				switch(orientamento) {
+					case VERTICAL: {
+						
+						if(stato == stateLevel.CERCO_ESTREMITA){
+							if(
+								GridModel.getCellValue(enemyGrid, cellaPrecColpita[0], cellaPrecColpita[1]) == null ||
+								GridModel.getCellValue(enemyGrid, cellaPrecColpita[0], cellaPrecColpita[1]) == CellStatus.CELL_EMPTY_HIT
+							){
+								estrNaveInd += 1;
+							}
+						}
+						else{
+							
+						}
+						
+					} break;
+					case HORIZONTAL: {
+						
+						if(stato == stateLevel.CERCO_ESTREMITA){
+							if(
+								GridModel.getCellValue(enemyGrid, cellaPrecColpita[0], cellaPrecColpita[1]) == null ||
+								GridModel.getCellValue(enemyGrid, cellaPrecColpita[0], cellaPrecColpita[1]) == CellStatus.CELL_EMPTY_HIT
+							){
+								estrNaveInd += 1;
+							}
+						}
+						
+						if(estrNaveInd == 0){
+							
+							if(
+								GridModel.getCellValue(enemyGrid, cellaConNavePrecColpita[0], cellaConNavePrecColpita[1]+1) == null ||
+								GridModel.getCellValue(enemyGrid, cellaConNavePrecColpita[0], cellaConNavePrecColpita[1]+1) == CellStatus.CELL_EMPTY_HIT
+							){
+								estrNaveInd += 1;
+								if(
+									GridModel.getCellValue(enemyGrid, primaCellaColpita[0], primaCellaColpita[1]-1) == null ||
+									GridModel.getCellValue(enemyGrid, primaCellaColpita[0], primaCellaColpita[1]-1) == CellStatus.CELL_EMPTY_HIT
+								){
+									estrNaveInd += 1;
+									affondata = true;
+									//----------------------- Azzero lo stato
+									return generaCellaCasuale();
+								}
+								else{
+									
+								}
+							}
+							
+						}
+						else{
+							
+						}
+						
+					} break;
+				}
+				
 			}
 			else{
 				
