@@ -25,6 +25,7 @@ public class GridAIModel extends GridModel implements Observer {
 	 * */
 	public int[] newMove() {
 		
+	private int[] generaCellaCasuale() {
 		int range = this.gridCols; // numeri da 0 a numero di colonne/righe della matrice
 		int[] cell = new int[2];
 		
