@@ -62,6 +62,11 @@ public class GridAIModel extends GridModel implements Observer {
 		private int dimGrid;
 		
 		public AI(int dimGrid){
+			this.init();
+			this.dimGrid = dimGrid;
+		}
+		
+		public void init() {
 			naveIndividuata = false;
 			cellaConNavePrecColpita = new int[2];
 			Arrays.fill(cellaConNavePrecColpita, -1);
@@ -74,7 +79,6 @@ public class GridAIModel extends GridModel implements Observer {
 			orientamento = null;
 			estrNaveInd = 0;
 			affondata = false;
-			this.dimGrid = dimGrid;
 		}
 		
 		public int[] getCellaConNavePrecColpita() {
