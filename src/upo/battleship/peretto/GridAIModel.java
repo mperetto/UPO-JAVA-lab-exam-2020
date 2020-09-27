@@ -46,6 +46,41 @@ public class GridAIModel extends GridModel implements Observer {
 				this.enemyGrid[i][j] = g[i][j];
 			}
 		}
+		
+	}
+	
+	class AI {
+		
+		private boolean naveIndividuata;
+		private int[] cellaConNavePrecColpita;
+		private int[] cellaConAcquaPrecColpita;
+		private int[] primaCellaColpita;
+		private int[] cellaPrecColpita;
+		private ShipOrientation orientamento;
+		private int estrNaveInd;
+		private boolean affondata;
+		private int dimGrid;
+		
+		public AI(int dimGrid){
+			naveIndividuata = false;
+			cellaConNavePrecColpita = new int[2];
+			Arrays.fill(cellaConNavePrecColpita, -1);
+			cellaConAcquaPrecColpita = new int[2];
+			Arrays.fill(cellaConAcquaPrecColpita, -1);
+			primaCellaColpita = new int[2];
+			Arrays.fill(primaCellaColpita, -1);
+			cellaPrecColpita = new int[2];
+			Arrays.fill(cellaPrecColpita, -1);
+			orientamento = null;
+			estrNaveInd = 0;
+			affondata = false;
+			this.dimGrid = dimGrid;
+		}
+		
+		public boolean isNaveIndividuata() {
+			return naveIndividuata;
+		}
+		
 	}
 
 }
