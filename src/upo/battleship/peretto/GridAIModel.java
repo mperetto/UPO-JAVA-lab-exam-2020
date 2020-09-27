@@ -77,6 +77,66 @@ public class GridAIModel extends GridModel implements Observer {
 			this.dimGrid = dimGrid;
 		}
 		
+		public int[] getCellaConNavePrecColpita() {
+			return cellaConNavePrecColpita;
+		}
+
+		public void setCellaConNavePrecColpita(int[] cellaConNavePrecColpita) {
+			this.cellaConNavePrecColpita = cellaConNavePrecColpita;
+		}
+
+		public int[] getCellaConAcquaPrecColpita() {
+			return cellaConAcquaPrecColpita;
+		}
+
+		public void setCellaConAcquaPrecColpita(int[] cellaConAcquaPrecColpita) {
+			this.cellaConAcquaPrecColpita = cellaConAcquaPrecColpita;
+		}
+
+		public int[] getPrimaCellaColpita() {
+			return primaCellaColpita;
+		}
+
+		public void setPrimaCellaColpita(int[] primaCellaColpita) {
+			this.primaCellaColpita = primaCellaColpita;
+		}
+
+		public int[] getCellaPrecColpita() {
+			return cellaPrecColpita;
+		}
+
+		public void setCellaPrecColpita(int[] cellaPrecColpita) {
+			this.cellaPrecColpita = cellaPrecColpita;
+		}
+
+		public ShipOrientation getOrientamento() {
+			return orientamento;
+		}
+
+		public void setOrientamento(ShipOrientation orientamento) {
+			this.orientamento = orientamento;
+		}
+
+		public int getEstrNaveInd() {
+			return estrNaveInd;
+		}
+
+		public void setEstrNaveInd(int estrNaveInd) {
+			this.estrNaveInd = estrNaveInd;
+		}
+
+		public boolean isAffondata() {
+			return affondata;
+		}
+
+		public void setAffondata(boolean affondata) {
+			this.affondata = affondata;
+		}
+
+		public void setNaveIndividuata(boolean naveIndividuata) {
+			this.naveIndividuata = naveIndividuata;
+		}
+		
 		public boolean isNaveIndividuata() {
 			return naveIndividuata;
 		}
