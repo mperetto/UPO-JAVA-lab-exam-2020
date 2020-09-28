@@ -87,7 +87,8 @@ public class GridAIModel extends GridModel implements Observer {
 		}
 
 		public void setCellaConNavePrecColpita(int[] cellaConNavePrecColpita) {
-			this.cellaConNavePrecColpita = cellaConNavePrecColpita;
+			this.cellaConNavePrecColpita[0] = cellaConNavePrecColpita[0];
+			this.cellaConNavePrecColpita[1] = cellaConNavePrecColpita[1];
 		}
 
 		public int[] getCellaConAcquaPrecColpita() {
@@ -95,7 +96,8 @@ public class GridAIModel extends GridModel implements Observer {
 		}
 
 		public void setCellaConAcquaPrecColpita(int[] cellaConAcquaPrecColpita) {
-			this.cellaConAcquaPrecColpita = cellaConAcquaPrecColpita;
+			this.cellaConAcquaPrecColpita[0] = cellaConAcquaPrecColpita[0];
+			this.cellaConAcquaPrecColpita[1] = cellaConAcquaPrecColpita[1];
 		}
 
 		public int[] getPrimaCellaColpita() {
@@ -103,7 +105,8 @@ public class GridAIModel extends GridModel implements Observer {
 		}
 
 		public void setPrimaCellaColpita(int[] primaCellaColpita) {
-			this.primaCellaColpita = primaCellaColpita;
+			this.primaCellaColpita[0] = primaCellaColpita[0];
+			this.primaCellaColpita[1] = primaCellaColpita[1];
 		}
 
 		public int[] getCellaPrecColpita() {
@@ -111,7 +114,8 @@ public class GridAIModel extends GridModel implements Observer {
 		}
 
 		public void setCellaPrecColpita(int[] cellaPrecColpita) {
-			this.cellaPrecColpita = cellaPrecColpita;
+			this.cellaPrecColpita[0] = cellaPrecColpita[0];
+			this.cellaPrecColpita[1] = cellaPrecColpita[1];
 		}
 
 		public ShipOrientation getOrientamento() {
