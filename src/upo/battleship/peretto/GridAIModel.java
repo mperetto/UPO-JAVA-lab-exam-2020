@@ -9,12 +9,14 @@ public class GridAIModel extends GridModel implements Observer {
 	
 	private CellStatus[][] enemyGrid;
 	private GridPlayerModel playerModel;
+	private AI ai;
 
 	public GridAIModel(int rows, int cols, GridPlayerModel playerModel) {
 		super(rows, cols);
 		this.enemyGrid = new CellStatus[rows][cols];
 		this.playerModel = playerModel;
 		this.playerModel.addObserver(this);
+		this.ai = new AI(rows);
 	}
 	
 	/**
@@ -25,6 +27,116 @@ public class GridAIModel extends GridModel implements Observer {
 	 * */
 	public int[] newMove() {
 		
+		if(!ai.isNaveIndividuata()){
+			
+			int[] cellaDaColpire = new int[2];
+			cellaDaColpire = generaCellaCasuale();
+			playerModel.hitCell(cellaDaColpire[0], cellaDaColpire[1]);
+			
+			if(this.enemyGrid[cellaDaColpire[0]][cellaDaColpire[1]] == CellStatus.CELL_SHIP_HIT){
+				ai.setNaveIndividuata(true);
+				ai.setCellaConNavePrecColpita(cellaDaColpire);
+				ai.setPrimaCellaColpita(cellaDaColpire);
+			}
+		}
+		else if(ai.getOrientamento() != null){
+			//ho l'orientamento cerco le estremità
+		}
+		else{
+			
+			int[] cellaConNavePrecColpita = ai.getCellaConNavePrecColpita();
+			CellStatus[] celleAdj = this.getCellAdj(cellaConNavePrecColpita[0], cellaConNavePrecColpita[1]);
+			int[] cella = new int[2];
+			
+			for(int i = 0; i < celleAdj.length; i++){
+				if(celleAdj[i] == CellStatus.CELL_EMPTY){
+					
+					switch(i) {
+						case 0: {// cella Nord
+							cella[0] = cellaConNavePrecColpita[0] - 1;
+							cella[1] = cellaConNavePrecColpita[1];
+							
+							playerModel.hitCell(cellaConNavePrecColpita[0] - 1, cellaConNavePrecColpita[1]);
+							
+						} break;
+						
+						case 1: {// cella Est
+							cella[0] = cellaConNavePrecColpita[0];
+							cella[1] = cellaConNavePrecColpita[1] + 1;
+							
+							playerModel.hitCell(cellaConNavePrecColpita[0], cellaConNavePrecColpita[1] + 1);
+							
+						} break;
+						
+						case 2: {// cella Sud
+							cella[0] = cellaConNavePrecColpita[0] + 1;
+							cella[1] = cellaConNavePrecColpita[1];
+							
+							playerModel.hitCell(cellaConNavePrecColpita[0] + 1, cellaConNavePrecColpita[1]);
+							
+						} break;
+						
+						case 3: {// cella Ovest
+							cella[0] = cellaConNavePrecColpita[0];
+							cella[1] = cellaConNavePrecColpita[1] - 1;
+							
+							playerModel.hitCell(cellaConNavePrecColpita[0], cellaConNavePrecColpita[1] - 1);
+							
+						} break;
+						
+					}
+					
+					break;
+				}
+				
+				celleAdj = this.getCellAdj(cellaConNavePrecColpita[0], cellaConNavePrecColpita[1]);
+				if(GridModel.getCellValue(enemyGrid, cella[0], cella[1]) == CellStatus.CELL_SHIP_HIT){
+					ai.setCellaConNavePrecColpita(cella);
+				}
+				
+				if(
+					(celleAdj[0] == null || celleAdj[0] == CellStatus.CELL_EMPTY_HIT) &&
+					(celleAdj[2] == null || celleAdj[2] == CellStatus.CELL_EMPTY_HIT)
+				){
+					ai.setOrientamento(ShipOrientation.HORIZONTAL);
+					if(celleAdj[1] == null || celleAdj[1] == CellStatus.CELL_EMPTY_HIT){
+						ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
+					}
+				}
+				else if(
+						(celleAdj[1] == null || celleAdj[1] == CellStatus.CELL_EMPTY_HIT) &&
+						(celleAdj[3] == null || celleAdj[3] == CellStatus.CELL_EMPTY_HIT)
+				){
+					ai.setOrientamento(ShipOrientation.VERTICAL);
+					if(celleAdj[0] == null || celleAdj[0] == CellStatus.CELL_EMPTY_HIT){
+						ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
+					}
+				}
+				
+				if(ai.getOrientamento() == null){
+					
+					int[] cpc = ai.getCellaConNavePrecColpita();
+					int[] pcc = ai.getPrimaCellaColpita();
+					
+					if(
+						cpc[0] != -1 &&
+						(cpc[0] != pcc[0] || cpc[1] != pcc[1])
+					){
+						if(cpc[0] != pcc[0]){
+							ai.setOrientamento(ShipOrientation.VERTICAL);
+						}
+						else if(cpc[1] != pcc[1]){
+							ai.setOrientamento(ShipOrientation.HORIZONTAL);
+						}
+					}
+					
+				}
+			}
+		}
+		
+		return null;
+	}
+	
 	private int[] generaCellaCasuale() {
 		int range = this.gridCols; // numeri da 0 a numero di colonne/righe della matrice
 		int[] cell = new int[2];
@@ -48,6 +160,18 @@ public class GridAIModel extends GridModel implements Observer {
 			}
 		}
 		
+	}
+	
+	public CellStatus[] getCellAdj(int r, int c) {
+		
+		CellStatus[] cAdj = new CellStatus[4];
+		
+		cAdj[0] = GridModel.getCellValue(enemyGrid, r-1, c);
+		cAdj[1] = GridModel.getCellValue(enemyGrid, r, c+1);
+		cAdj[2] = GridModel.getCellValue(enemyGrid, r+1, c);
+		cAdj[3] = GridModel.getCellValue(enemyGrid, r, c-1);
+		
+		return cAdj;
 	}
 	
 	class AI {
