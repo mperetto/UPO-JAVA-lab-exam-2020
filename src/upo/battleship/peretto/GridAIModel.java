@@ -40,7 +40,76 @@ public class GridAIModel extends GridModel implements Observer {
 			}
 		}
 		else if(ai.getOrientamento() != null){
-			//ho l'orientamento cerco le estremità
+			
+			switch(ai.getOrientamento()){
+				case VERTICAL:{
+					
+					if(ai.getEstrNaveInd() == 0){
+						int[] cellaDaColpire = ai.getCellaConNavePrecColpita();
+						cellaDaColpire[0] -= 1;
+						if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != null){
+							playerModel.hitCell(cellaDaColpire[0], cellaDaColpire[1]);
+							if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) == CellStatus.CELL_EMPTY_HIT){
+								ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
+							}
+							else{
+								ai.setCellaConNavePrecColpita(cellaDaColpire);
+							}
+						}
+					}
+					else{
+						int[] cellaDaColpire = ai.getPrimaCellaColpita();
+						cellaDaColpire[0] += 1;
+						if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != null){
+							playerModel.hitCell(cellaDaColpire[0], cellaDaColpire[1]);
+							if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) == CellStatus.CELL_EMPTY_HIT){
+								ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
+								ai.setAffondata(true);
+								ai.init();
+							}
+							else{
+								ai.setCellaConNavePrecColpita(cellaDaColpire);
+								ai.setPrimaCellaColpita(cellaDaColpire);
+							}
+						}
+					}
+					
+				} break;
+				case HORIZONTAL: {
+					
+					if(ai.getEstrNaveInd() == 0){
+						int[] cellaDaColpire = ai.getCellaConNavePrecColpita();
+						cellaDaColpire[1] += 1;
+						if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != null){
+							playerModel.hitCell(cellaDaColpire[0], cellaDaColpire[1]);
+							if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) == CellStatus.CELL_EMPTY_HIT){
+								ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
+							}
+							else{
+								ai.setCellaConNavePrecColpita(cellaDaColpire);
+							}
+						}
+					}
+					else{
+						int[] cellaDaColpire = ai.getPrimaCellaColpita();
+						cellaDaColpire[1] -= 1;
+						if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != null){
+							playerModel.hitCell(cellaDaColpire[0], cellaDaColpire[1]);
+							if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) == CellStatus.CELL_EMPTY_HIT){
+								ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
+								ai.setAffondata(true);
+								ai.init();
+							}
+							else{
+								ai.setCellaConNavePrecColpita(cellaDaColpire);
+								ai.setPrimaCellaColpita(cellaDaColpire);
+							}
+						}
+					}
+					
+				} break;
+			}
+			
 		}
 		else{
 			
