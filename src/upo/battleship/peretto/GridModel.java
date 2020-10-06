@@ -144,10 +144,19 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		
 		CellStatus[][] filteredGrid = FilterGrid();
 		
+		try {
+			this.newMove();
+		}
+		catch(UnsupportedOperationException e) {
+			return;
+		}
+		
 		this.setChanged();
 		this.notifyObservers(filteredGrid);
 		
 	}
+	
+	public abstract int[] newMove() throws UnsupportedOperationException;
 	
 	/**
 	 * Filtra la griglia nascondendo il posizionamento delle navi non colpite,
