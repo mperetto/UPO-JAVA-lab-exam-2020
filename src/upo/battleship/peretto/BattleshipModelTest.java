@@ -73,6 +73,19 @@ public class BattleshipModelTest {
 		}
 		catch(IllegalStateException e){}
 	}
+	
+	@Test
+	public void testCheckWin() {
+		model.addShip(new ShipModel(1, 9, ShipType.SOTTOMARINO, ShipOrientation.VERTICAL));
+		GridAIModel ai = model.getGridAIModel();
+		ai.placeShip(1, 9, ShipOrientation.VERTICAL, 3);
+		assert(model.checkWin() == 0);
+		GridPlayerModel p = model.getGridPlayerModel();
+		p.hitCell(1, 9);
+		p.hitCell(2, 9);
+		p.hitCell(3, 9);
+		assert(model.checkWin() == 2);
+	}
 
 	@Test
 	public void testGetGridPlayerModel() {
