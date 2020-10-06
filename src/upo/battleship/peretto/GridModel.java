@@ -7,12 +7,13 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 	
 	protected CellStatus[][] grid;
 	protected int gridRows, gridCols;
-	private int totNaviAffondate;
+	private int celleConPartiNave;
 	
 	public GridModel(int rows, int cols) {
 		this.grid = new CellStatus[rows][cols];
 		this.gridRows = rows;
 		this.gridCols = cols;
+		this.celleConPartiNave = 0;
 		
 		for(CellStatus[] row : this.grid) {
 			Arrays.fill(row, CellStatus.CELL_EMPTY);
@@ -77,7 +78,7 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 				this.grid[row][col] = CellStatus.CELL_SHIP;
 				row++;
 			}
-			
+			this.celleConPartiNave++;
 			dim--;
 		}
 		
@@ -133,7 +134,10 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		
 		switch(this.grid[row][col]) {
 			case CELL_EMPTY: this.grid[row][col] = CellStatus.CELL_EMPTY_HIT; break;
-			case CELL_SHIP: this.grid[row][col] = CellStatus.CELL_SHIP_HIT; break;
+			case CELL_SHIP: {
+				this.grid[row][col] = CellStatus.CELL_SHIP_HIT;
+				this.celleConPartiNave--;
+			} break;
 			default:
 				break;
 		}
@@ -178,8 +182,8 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 	 * 
 	 * @return int il totale delle navi affondate.
 	 * */
-	public int getNaviAffondate() {
-		return this.totNaviAffondate;
+	public boolean isTutteNaviAffondate() {
+		return (this.celleConPartiNave == 0);
 	}
 	
 	/*

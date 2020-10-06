@@ -93,14 +93,10 @@ public class BattleshipModel {
 	 * */
 	public int checkWin() {
 		
-		int naviAffPlayer = playerModel.getNaviAffondate();
-		int naviAffAI = aiModel.getNaviAffondate();
-		int totNavi = this.numIncrociatori + this.numPortaerei + this.numSottomarini;
-		
-		if(naviAffPlayer == totNavi){
+		if(playerModel.isTutteNaviAffondate()){
 			return 1;
 		}
-		else if(naviAffAI == totNavi){
+		else if(aiModel.isTutteNaviAffondate()){
 			return 2;
 		}
 		else{
