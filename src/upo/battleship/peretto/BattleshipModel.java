@@ -94,10 +94,10 @@ public class BattleshipModel {
 	public int checkWin() {
 		
 		if(playerModel.isTutteNaviAffondate()){
-			return 1;
+			return 2;
 		}
 		else if(aiModel.isTutteNaviAffondate()){
-			return 2;
+			return 1;
 		}
 		else{
 			return 0;
