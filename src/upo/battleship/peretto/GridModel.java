@@ -144,15 +144,16 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		
 		CellStatus[][] filteredGrid = FilterGrid();
 		
+
+		this.setChanged();
+		this.notifyObservers(filteredGrid);
+		
 		try {
 			this.newMove();
 		}
 		catch(UnsupportedOperationException e) {
 			return;
 		}
-		
-		this.setChanged();
-		this.notifyObservers(filteredGrid);
 		
 	}
 	
