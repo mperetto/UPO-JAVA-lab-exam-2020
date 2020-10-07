@@ -58,6 +58,7 @@ public class GridAIModel extends GridModel implements Observer {
 						}
 						else {
 							ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
+							this.newMove();
 						}
 					}
 					else{
@@ -77,6 +78,9 @@ public class GridAIModel extends GridModel implements Observer {
 						}
 						else {
 							ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
+							ai.setAffondata(true);
+							ai.init();
+							this.newMove();
 						}
 					}
 					
@@ -97,6 +101,7 @@ public class GridAIModel extends GridModel implements Observer {
 						}
 						else {
 							ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
+							this.newMove();
 						}
 					}
 					else{
@@ -116,6 +121,9 @@ public class GridAIModel extends GridModel implements Observer {
 						}
 						else {
 							ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
+							ai.setAffondata(true);
+							ai.init();
+							this.newMove();
 						}
 					}
 					
