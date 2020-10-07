@@ -170,48 +170,49 @@ public class GridAIModel extends GridModel implements Observer {
 					break;
 				}
 				
-				celleAdj = this.getCellAdj(cellaConNavePrecColpita[0], cellaConNavePrecColpita[1]);
-				if(GridModel.getCellValue(enemyGrid, cella[0], cella[1]) == CellStatus.CELL_SHIP_HIT){
-					ai.setCellaConNavePrecColpita(cella);
+				
+			}
+			celleAdj = this.getCellAdj(cellaConNavePrecColpita[0], cellaConNavePrecColpita[1]);
+			if(GridModel.getCellValue(enemyGrid, cella[0], cella[1]) == CellStatus.CELL_SHIP_HIT){
+				ai.setCellaConNavePrecColpita(cella);
+			}
+			
+			if(
+				(celleAdj[0] == null || celleAdj[0] == CellStatus.CELL_EMPTY_HIT) &&
+				(celleAdj[2] == null || celleAdj[2] == CellStatus.CELL_EMPTY_HIT)
+			){
+				ai.setOrientamento(ShipOrientation.HORIZONTAL);
+				if(celleAdj[1] == null || celleAdj[1] == CellStatus.CELL_EMPTY_HIT){
+					ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
 				}
+			}
+			else if(
+					(celleAdj[1] == null || celleAdj[1] == CellStatus.CELL_EMPTY_HIT) &&
+					(celleAdj[3] == null || celleAdj[3] == CellStatus.CELL_EMPTY_HIT)
+			){
+				ai.setOrientamento(ShipOrientation.VERTICAL);
+				if(celleAdj[0] == null || celleAdj[0] == CellStatus.CELL_EMPTY_HIT){
+					ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
+				}
+			}
+			
+			if(ai.getOrientamento() == null){
+				
+				int[] cpc = ai.getCellaConNavePrecColpita();
+				int[] pcc = ai.getPrimaCellaColpita();
 				
 				if(
-					(celleAdj[0] == null || celleAdj[0] == CellStatus.CELL_EMPTY_HIT) &&
-					(celleAdj[2] == null || celleAdj[2] == CellStatus.CELL_EMPTY_HIT)
+					cpc[0] != -1 &&
+					(cpc[0] != pcc[0] || cpc[1] != pcc[1])
 				){
-					ai.setOrientamento(ShipOrientation.HORIZONTAL);
-					if(celleAdj[1] == null || celleAdj[1] == CellStatus.CELL_EMPTY_HIT){
-						ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
+					if(cpc[0] != pcc[0]){
+						ai.setOrientamento(ShipOrientation.VERTICAL);
 					}
-				}
-				else if(
-						(celleAdj[1] == null || celleAdj[1] == CellStatus.CELL_EMPTY_HIT) &&
-						(celleAdj[3] == null || celleAdj[3] == CellStatus.CELL_EMPTY_HIT)
-				){
-					ai.setOrientamento(ShipOrientation.VERTICAL);
-					if(celleAdj[0] == null || celleAdj[0] == CellStatus.CELL_EMPTY_HIT){
-						ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
+					else if(cpc[1] != pcc[1]){
+						ai.setOrientamento(ShipOrientation.HORIZONTAL);
 					}
 				}
 				
-				if(ai.getOrientamento() == null){
-					
-					int[] cpc = ai.getCellaConNavePrecColpita();
-					int[] pcc = ai.getPrimaCellaColpita();
-					
-					if(
-						cpc[0] != -1 &&
-						(cpc[0] != pcc[0] || cpc[1] != pcc[1])
-					){
-						if(cpc[0] != pcc[0]){
-							ai.setOrientamento(ShipOrientation.VERTICAL);
-						}
-						else if(cpc[1] != pcc[1]){
-							ai.setOrientamento(ShipOrientation.HORIZONTAL);
-						}
-					}
-					
-				}
 			}
 		}
 		
