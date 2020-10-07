@@ -63,7 +63,10 @@ public class GridAIModel extends GridModel implements Observer {
 					}
 					else{
 						int[] cellaDaColpire = ai.getPrimaCellaColpita();
-						cellaDaColpire[0] += 1;
+						do{
+							cellaDaColpire[0] += 1;
+						}while(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) == CellStatus.CELL_SHIP_HIT);
+						
 						if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != null && GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != CellStatus.CELL_EMPTY_HIT){
 							playerModel.hitCell(cellaDaColpire[0], cellaDaColpire[1]);
 							if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) == CellStatus.CELL_EMPTY_HIT){
@@ -106,7 +109,10 @@ public class GridAIModel extends GridModel implements Observer {
 					}
 					else{
 						int[] cellaDaColpire = ai.getPrimaCellaColpita();
-						cellaDaColpire[1] -= 1;
+						do{
+							cellaDaColpire[0] -= 1;
+						}while(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) == CellStatus.CELL_SHIP_HIT);
+						
 						if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != null && GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != CellStatus.CELL_EMPTY_HIT){
 							playerModel.hitCell(cellaDaColpire[0], cellaDaColpire[1]);
 							if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) == CellStatus.CELL_EMPTY_HIT){
