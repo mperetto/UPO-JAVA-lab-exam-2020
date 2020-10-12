@@ -1,6 +1,7 @@
 package upo.observer;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class GridByRefTest {
 
@@ -26,10 +27,24 @@ public class GridByRefTest {
 		
 	}
 	
+	public void GeneraCasuale() {
+		long l = 1;
+		Random r = new Random(1);
+		
+		for(int i = 0; i < 100; i++){
+			
+			if(i%2 == 0)
+				System.out.println();
+			System.out.println(r.nextInt(10));
+			
+		}
+	}
+	
 	public static void main(String[] args) {
 		GridByRefTest gbr = new GridByRefTest();
 		
 		gbr.crea();
+		gbr.GeneraCasuale();
 	}
 
 }
