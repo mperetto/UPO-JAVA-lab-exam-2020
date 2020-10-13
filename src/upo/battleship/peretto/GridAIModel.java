@@ -3,8 +3,7 @@ package upo.battleship.peretto;
 import java.lang.Math;
 import java.util.Arrays;
 import java.util.Observable;
-import java.util.Observer;
-import java.util.Random; 
+import java.util.Observer; 
 
 public class GridAIModel extends GridModel implements Observer {
 	
@@ -29,7 +28,7 @@ public class GridAIModel extends GridModel implements Observer {
 	 * @return cell, cella da colpire all'interno della griglia del player
 	 * 
 	 * */
-	public int[] newMove(long ...seed) {
+	public int[] newMove() {
 		
 		int[] cellaColpita = new int[2];
 		
@@ -48,7 +47,7 @@ public class GridAIModel extends GridModel implements Observer {
 			}
 		}
 		else if(ai.getOrientamento() != null){
-			//Possiedo l'orientamento
+			
 			switch(ai.getOrientamento()){
 				case VERTICAL:{
 					
@@ -154,7 +153,7 @@ public class GridAIModel extends GridModel implements Observer {
 			
 		}
 		else{
-			//Non possiedo l'orientamento lo cerco
+			
 			int[] cellaConNavePrecColpita = ai.getCellaConNavePrecColpita();
 			CellStatus[] celleAdj = this.getCellAdj(cellaConNavePrecColpita[0], cellaConNavePrecColpita[1]);
 			int[] cella = new int[2];
@@ -250,20 +249,14 @@ public class GridAIModel extends GridModel implements Observer {
 		return cellaColpita;
 	}
 	
-	private int[] generaCellaCasuale(long ...seed) {
+	private int[] generaCellaCasuale() {
 		int range = this.gridCols; // numeri da 0 a numero di colonne/righe della matrice
 		int[] cell = new int[2];
-		Random rand;
-		
-		if(seed.length == 0)
-			rand = new Random();
-		else
-			rand = new Random(seed[0]);
 		
 		do{
-			cell[0] = rand.nextInt(range);
-			cell[1] = rand.nextInt(range);
-		}while(this.enemyGrid[cell[0]][cell[1]] != CellStatus.CELL_EMPTY);
+			cell[0] = (int)Math.random()*range;
+			cell[1] = (int)Math.random()*range;
+		}while(this.enemyGrid[cell[0]][cell[1]] != CellStatus.CELL_EMPTY);		
 		
 		return cell;
 	}

@@ -157,7 +157,7 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		
 	}
 	
-	public abstract int[] newMove(long ...seed) throws UnsupportedOperationException;
+	public abstract int[] newMove() throws UnsupportedOperationException;
 	
 	/**
 	 * Filtra la griglia nascondendo il posizionamento delle navi non colpite,

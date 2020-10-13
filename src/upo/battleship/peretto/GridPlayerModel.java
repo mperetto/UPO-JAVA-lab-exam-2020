@@ -25,7 +25,7 @@ public class GridPlayerModel extends GridModel {
 
 
 	@Override
-	public int[] newMove(long ...seed) throws UnsupportedOperationException {
+	public int[] newMove() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException();
 	}
 
