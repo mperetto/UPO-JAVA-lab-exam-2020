@@ -28,11 +28,15 @@ public class GridAIModel extends GridModel implements Observer {
 	 * */
 	public int[] newMove(long ...seed) {
 		
+		int[] cellaColpita = new int[2];
+		
 		if(!ai.isNaveIndividuata()){
 			
 			int[] cellaDaColpire = new int[2];
 			cellaDaColpire = generaCellaCasuale();
 			playerModel.hitCell(cellaDaColpire[0], cellaDaColpire[1]);
+			cellaColpita[0] = cellaDaColpire[0];
+			cellaColpita[1] = cellaDaColpire[1];
 			
 			if(this.enemyGrid[cellaDaColpire[0]][cellaDaColpire[1]] == CellStatus.CELL_SHIP_HIT){
 				ai.setNaveIndividuata(true);
@@ -50,6 +54,8 @@ public class GridAIModel extends GridModel implements Observer {
 						cellaDaColpire[0] -= 1;
 						if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != null && GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != CellStatus.CELL_EMPTY_HIT){
 							playerModel.hitCell(cellaDaColpire[0], cellaDaColpire[1]);
+							cellaColpita[0] = cellaDaColpire[0];
+							cellaColpita[1] = cellaDaColpire[1];
 							if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) == CellStatus.CELL_EMPTY_HIT){
 								ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
 							}
@@ -70,6 +76,8 @@ public class GridAIModel extends GridModel implements Observer {
 						
 						if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != null && GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != CellStatus.CELL_EMPTY_HIT){
 							playerModel.hitCell(cellaDaColpire[0], cellaDaColpire[1]);
+							cellaColpita[0] = cellaDaColpire[0];
+							cellaColpita[1] = cellaDaColpire[1];
 							if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) == CellStatus.CELL_EMPTY_HIT){
 								ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
 								ai.setAffondata(true);
@@ -96,6 +104,8 @@ public class GridAIModel extends GridModel implements Observer {
 						cellaDaColpire[1] += 1;
 						if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != null && GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != CellStatus.CELL_EMPTY_HIT){
 							playerModel.hitCell(cellaDaColpire[0], cellaDaColpire[1]);
+							cellaColpita[0] = cellaDaColpire[0];
+							cellaColpita[1] = cellaDaColpire[1];
 							if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) == CellStatus.CELL_EMPTY_HIT){
 								ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
 							}
@@ -116,6 +126,8 @@ public class GridAIModel extends GridModel implements Observer {
 						
 						if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != null && GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != CellStatus.CELL_EMPTY_HIT){
 							playerModel.hitCell(cellaDaColpire[0], cellaDaColpire[1]);
+							cellaColpita[0] = cellaDaColpire[0];
+							cellaColpita[1] = cellaDaColpire[1];
 							if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) == CellStatus.CELL_EMPTY_HIT){
 								ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
 								ai.setAffondata(true);
@@ -181,7 +193,8 @@ public class GridAIModel extends GridModel implements Observer {
 						} break;
 						
 					}
-					
+					cellaColpita[0] = cella[0];
+					cellaColpita[1] = cella[1];
 					break;
 				}
 				
@@ -231,7 +244,7 @@ public class GridAIModel extends GridModel implements Observer {
 			}
 		}
 		
-		return null;
+		return cellaColpita;
 	}
 	
 	private int[] generaCellaCasuale(long ...seed) {
