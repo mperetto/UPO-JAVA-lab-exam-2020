@@ -3,13 +3,15 @@ package upo.battleship.peretto;
 import java.lang.Math;
 import java.util.Arrays;
 import java.util.Observable;
-import java.util.Observer; 
+import java.util.Observer;
+import java.util.Random; 
 
 public class GridAIModel extends GridModel implements Observer {
 	
 	private CellStatus[][] enemyGrid;
 	private GridPlayerModel playerModel;
 	private AI ai;
+	private Random randGenerator;
 
 	public GridAIModel(int rows, int cols, GridPlayerModel playerModel) {
 		super(rows, cols);
@@ -20,6 +22,7 @@ public class GridAIModel extends GridModel implements Observer {
 		this.playerModel = playerModel;
 		this.playerModel.addObserver(this);
 		this.ai = new AI(rows);
+		this.randGenerator = new Random();
 	}
 	
 	/**
@@ -249,13 +252,23 @@ public class GridAIModel extends GridModel implements Observer {
 		return cellaColpita;
 	}
 	
+	/**
+	 * Crea un nuovo generatore random partendo da un seme fornito
+	 * 
+	 * @param long seed, seme di partenza per i numeri randomici
+	 * */
+	public void setRandomSeed(long seed) {
+		this.randGenerator = new Random(seed);
+	}
+	
 	private int[] generaCellaCasuale() {
 		int range = this.gridCols; // numeri da 0 a numero di colonne/righe della matrice
 		int[] cell = new int[2];
+		Random r = this.randGenerator;
 		
 		do{
-			cell[0] = (int)Math.random()*range;
-			cell[1] = (int)Math.random()*range;
+			cell[0] = r.nextInt(range);
+			cell[1] = r.nextInt(range);
 		}while(this.enemyGrid[cell[0]][cell[1]] != CellStatus.CELL_EMPTY);		
 		
 		return cell;
