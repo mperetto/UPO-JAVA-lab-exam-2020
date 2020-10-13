@@ -15,6 +15,9 @@ public class GridAIModel extends GridModel implements Observer {
 	public GridAIModel(int rows, int cols, GridPlayerModel playerModel) {
 		super(rows, cols);
 		this.enemyGrid = new CellStatus[rows][cols];
+		for(CellStatus[] row : this.enemyGrid) {
+			Arrays.fill(row, CellStatus.CELL_EMPTY);
+		}
 		this.playerModel = playerModel;
 		this.playerModel.addObserver(this);
 		this.ai = new AI(rows);
@@ -65,7 +68,7 @@ public class GridAIModel extends GridModel implements Observer {
 						}
 						else {
 							ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
-							this.newMove();
+							return this.newMove();
 						}
 					}
 					else{
@@ -92,7 +95,7 @@ public class GridAIModel extends GridModel implements Observer {
 							ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
 							ai.setAffondata(true);
 							ai.init();
-							this.newMove();
+							return this.newMove();
 						}
 					}
 					
@@ -115,13 +118,13 @@ public class GridAIModel extends GridModel implements Observer {
 						}
 						else {
 							ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
-							this.newMove();
+							return this.newMove();
 						}
 					}
 					else{
 						int[] cellaDaColpire = ai.getPrimaCellaColpita();
 						do{
-							cellaDaColpire[0] -= 1;
+							cellaDaColpire[1] -= 1;
 						}while(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) == CellStatus.CELL_SHIP_HIT);
 						
 						if(GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != null && GridModel.getCellValue(enemyGrid, cellaDaColpire[0], cellaDaColpire[1]) != CellStatus.CELL_EMPTY_HIT){
@@ -142,7 +145,7 @@ public class GridAIModel extends GridModel implements Observer {
 							ai.setEstrNaveInd(ai.getEstrNaveInd() + 1);
 							ai.setAffondata(true);
 							ai.init();
-							this.newMove();
+							return this.newMove();
 						}
 					}
 					
