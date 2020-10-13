@@ -24,12 +24,10 @@ public class AIModelTest {
 		System.out.println("1");
 		int[] cella = new int[2];
 		while(!playerModel.isTutteNaviAffondate()){
-			System.out.println("1");
-			cella = aiModel.newMove(1);
-			System.out.println("1");
+			
+			cella = aiModel.newMove();
 			System.out.println("Colpita Cella: ("+cella[0]+","+cella[1]+")");
 			System.out.println("Press Any Key To Continue...");
-
 			new java.util.Scanner(System.in).nextLine();
 		}
 	}
