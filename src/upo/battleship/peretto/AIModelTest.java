@@ -21,15 +21,20 @@ public class AIModelTest {
 		}
 		
 		aiModel = new GridAIModel(10, 10, playerModel);
-		System.out.println("1");
+		aiModel.setRandomSeed(1);
+		
 		int[] cella = new int[2];
+		int cont = 0, numeroMosse = 45;
+		
 		while(!playerModel.isTutteNaviAffondate()){
 			
 			cella = aiModel.newMove();
-			System.out.println("Colpita Cella: ("+cella[0]+","+cella[1]+")");
-			System.out.println("Press Any Key To Continue...");
-			new java.util.Scanner(System.in).nextLine();
+			
+			cont++;
 		}
+		
+		assertEquals(cont, numeroMosse);
+		
 	}
 
 }
