@@ -287,6 +287,42 @@ public class GridAIModel extends GridModel implements Observer {
 		
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * */
+	@Override
+	public void placeShip(int row, int col, ShipOrientation orientation, int dim) throws IndexOutOfBoundsException {
+		
+		boolean esci = false;
+		int orientamento;
+		
+		while(!esci){
+			
+			row = randGenerator.nextInt(gridRows);
+			col = randGenerator.nextInt(gridCols);
+			orientamento = randGenerator.nextInt(2);
+			
+			if(orientamento == 0){
+				orientation = ShipOrientation.HORIZONTAL;
+				col = randGenerator.nextInt((gridCols-dim)+1);
+			}
+			else{
+				orientation = ShipOrientation.VERTICAL;
+				row = randGenerator.nextInt((gridRows-dim)+1);
+			}
+			
+			try{
+				super.placeShip(row, col, orientation, dim);
+				esci = true;
+			}
+			catch(IndexOutOfBoundsException e){
+				
+			}
+			
+		}
+		
+	}
+	
 	public CellStatus[] getCellAdj(int r, int c) {
 		
 		CellStatus[] cAdj = new CellStatus[4];
