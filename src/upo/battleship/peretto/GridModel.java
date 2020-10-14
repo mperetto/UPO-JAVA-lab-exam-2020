@@ -205,7 +205,10 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		
 		for(int i = 0; i < grid.length; i++){
 			for(int j = 0; j < grid[0].length; j++){
-				System.out.print(grid[i][j]+" | ");
+				if(grid[i][j] == CellStatus.CELL_EMPTY)
+					System.out.print(0+" | ");
+				else
+					System.out.print(1+" | ");
 			}
 			System.out.println();
 		}
