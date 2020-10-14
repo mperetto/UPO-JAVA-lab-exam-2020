@@ -289,6 +289,7 @@ public class GridAIModel extends GridModel implements Observer {
 	
 	/**
 	 * {@inheritDoc}
+	 * Per i parametri row, col l'inserimento di valori >= 0 comporta il posizionamento della nave con i parametri forniti
 	 * */
 	@Override
 	public void placeShip(int row, int col, ShipOrientation orientation, int dim) throws IndexOutOfBoundsException {
@@ -296,30 +297,39 @@ public class GridAIModel extends GridModel implements Observer {
 		boolean esci = false;
 		int orientamento;
 		
-		while(!esci){
-			
-			row = randGenerator.nextInt(gridRows);
-			col = randGenerator.nextInt(gridCols);
-			orientamento = randGenerator.nextInt(2);
-			
-			if(orientamento == 0){
-				orientation = ShipOrientation.HORIZONTAL;
-				col = randGenerator.nextInt((gridCols-dim)+1);
-			}
-			else{
-				orientation = ShipOrientation.VERTICAL;
-				row = randGenerator.nextInt((gridRows-dim)+1);
-			}
-			
+		if(row >= 0 && col >= 0){
 			try{
 				super.placeShip(row, col, orientation, dim);
-				esci = true;
 			}
-			catch(IndexOutOfBoundsException e){
+			catch (IndexOutOfBoundsException e){
+				throw new IndexOutOfBoundsException("(GridAI): "+e.getMessage());
+			}
+		}
+		else{
+			while(!esci){
+				
+				row = randGenerator.nextInt(gridRows);
+				col = randGenerator.nextInt(gridCols);
+				orientamento = randGenerator.nextInt(2);
+				
+				if(orientamento == 0){
+					orientation = ShipOrientation.HORIZONTAL;
+					col = randGenerator.nextInt((gridCols-dim)+1);
+				}
+				else{
+					orientation = ShipOrientation.VERTICAL;
+					row = randGenerator.nextInt((gridRows-dim)+1);
+				}
+				
+				try{
+					super.placeShip(row, col, orientation, dim);
+					esci = true;
+				}
+				catch(IndexOutOfBoundsException e){}
 				
 			}
-			
 		}
+		
 		
 	}
 	
