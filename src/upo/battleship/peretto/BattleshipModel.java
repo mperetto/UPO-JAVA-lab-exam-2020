@@ -112,6 +112,17 @@ public class BattleshipModel {
 		}
 	}
 	
+	public void hitCell(int row, int col) throws IndexOutOfBoundsException{
+		
+		try{
+			aiModel.hitCell(row, col);
+		}
+		catch(IndexOutOfBoundsException e){
+			throw new IndexOutOfBoundsException(e.getMessage());
+		}
+		
+	}
+	
 	/**
 	 * Restituisce oggetto di tipo GridPlayerModel istanziato
 	 * 
