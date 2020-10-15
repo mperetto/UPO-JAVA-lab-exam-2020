@@ -31,7 +31,8 @@ public class BattleshipModel {
 	}
 	
 	/**
-	 * Aggiunge una nave alla griglia di gioco del giocatore umano
+	 * Aggiunge una nave alla griglia di gioco del giocatore umano,
+	 * Simultaneamente aggiunge lo stesso tipo di nave alla griglia AI
 	 * 
 	 * @param ShipModel oggetto nave
 	 * @throws IllegalStateException in caso la nave non possa essere posizionata
@@ -52,6 +53,13 @@ public class BattleshipModel {
 		}
 		catch (IndexOutOfBoundsException e){
 			throw new IllegalStateException("Impossibile posizionare la nave. ERRORE: "+e.toString());
+		}
+		
+		try{
+			this.aiModel.placeShip(-1, -1, ShipOrientation.HORIZONTAL, s.getDimension());
+		}
+		catch (IndexOutOfBoundsException e){
+			throw new IllegalStateException("(GridAI) Impossibile posizionare la nave. ERRORE: "+e.toString());
 		}
 		
 		switch(s.getType()) {
