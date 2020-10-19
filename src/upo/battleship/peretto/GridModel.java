@@ -146,7 +146,7 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		
 
 		this.setChanged();
-		this.notifyObservers(filteredGrid);
+		this.notifyObservers(this.grid);
 		
 		try {
 			this.newMove();
