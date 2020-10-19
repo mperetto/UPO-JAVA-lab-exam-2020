@@ -281,7 +281,12 @@ public class GridAIModel extends GridModel implements Observer {
 		
 		for(int i = 0; i < this.gridRows; i++){
 			for(int j = 0; j < this.gridCols; j++){
-				this.enemyGrid[i][j] = g[i][j];
+				switch(g[i][j]){
+					case CELL_EMPTY_HIT: this.enemyGrid[i][j] = g[i][j]; break;
+					case CELL_SHIP_HIT: this.enemyGrid[i][j] = g[i][j]; break;
+					default: this.enemyGrid[i][j] = CellStatus.CELL_EMPTY;
+					break;
+				}
 			}
 		}
 		
