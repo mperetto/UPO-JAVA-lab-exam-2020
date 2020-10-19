@@ -40,6 +40,9 @@ public class GridView extends JPanel implements Observer{
 		this.add(this.generateGrid(10, gridPlayer));
 		this.add(btnTest);
 		
+		m.press(0, 0);
+		System.out.println("chiamato press!!");
+		
 		JFrame f = new JFrame("finestra griglia");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    f.setContentPane(this);
@@ -108,6 +111,7 @@ public class GridView extends JPanel implements Observer{
 				}
 			}
 			System.out.println();
+			System.out.println("effettuato update!!");
 		}
 	}
 	
