@@ -118,6 +118,10 @@ public class SettingsController implements ActionListener {
 						cols = 10;
 					}
 				}
+				JComponent comp = (JComponent) e.getSource();
+				Window win = SwingUtilities.getWindowAncestor(comp);
+				win.dispose();
+				System.out.println(((JComponent)e.getSource()).getName());
 			} break;
 			
 		}
