@@ -21,10 +21,7 @@ public class GridView extends JPanel implements Observer {
 	
 	private GridModel m;
 	
-	JButton btnTest;
-	JButton btnSalvaPartita, btnNuovaPartita;
-	JLabel[][] gridPlayer, gridEnemy;
-	JLabel lblTempo;
+	JLabel[][] grid;
 	
 	public GridView(GridModel m, int dim) {
 		super();
@@ -33,13 +30,11 @@ public class GridView extends JPanel implements Observer {
 		
 		this.m.addObserver(this);
 		
-		this.gridPlayer = new JLabel[dim][dim];
-		this.btnTest = new JButton("Click!!");
+		this.grid = new JLabel[dim][dim];
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		this.add(this.generateGrid(dim, gridPlayer));
-		this.add(btnTest);
+		this.add(this.generateGrid(dim, grid));
 		
 		JFrame f = new JFrame("finestra griglia");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
