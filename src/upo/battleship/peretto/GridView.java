@@ -20,6 +20,7 @@ import upo.observer.ObserverModel;
 public class GridView extends JPanel implements Observer {
 	
 	private GridModel m;
+	protected JFrame f;
 	
 	JLabel[][] grid;
 	
@@ -36,7 +37,7 @@ public class GridView extends JPanel implements Observer {
 		
 		this.add(this.generateGrid(dim, grid));
 		
-		JFrame f = new JFrame("finestra griglia");
+		f = new JFrame("Griglia Giocatore");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    f.setContentPane(this);
 	    f.pack();
