@@ -19,26 +19,26 @@ import upo.observer.ObserverModel;
 
 public class GridView extends JPanel implements Observer {
 	
-	private ObserverModel m;
+	private GridModel m;
 	
 	JButton btnTest;
 	JButton btnSalvaPartita, btnNuovaPartita;
 	JLabel[][] gridPlayer, gridEnemy;
 	JLabel lblTempo;
 	
-	public GridView(ObserverModel m) {
+	public GridView(GridModel m, int dim) {
 		super();
 		
 		this.m = m;
 		
 		this.m.addObserver(this);
 		
-		this.gridPlayer = new JLabel[10][10];
+		this.gridPlayer = new JLabel[dim][dim];
 		this.btnTest = new JButton("Click!!");
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		this.add(this.generateGrid(10, gridPlayer));
+		this.add(this.generateGrid(dim, gridPlayer));
 		this.add(btnTest);
 		
 		JFrame f = new JFrame("finestra griglia");
