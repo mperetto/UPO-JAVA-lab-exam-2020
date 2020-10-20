@@ -88,18 +88,18 @@ public class GridView extends JPanel implements Observer {
 			for(int j = 0; j < 10; j++) {
 				System.out.print(g[i][j]);
 				switch(g[i][j]) {
-					case 0: this.gridPlayer[i][j].setBackground(Color.WHITE); break;
+					case 0: this.grid[i][j].setBackground(Color.WHITE); break;
 					case 1: {
-						this.gridPlayer[i][j].setBackground(Color.WHITE);
-						this.gridPlayer[i][j].setText("X");
+						this.grid[i][j].setBackground(Color.WHITE);
+						this.grid[i][j].setText("X");
 					}break;
 					case 2: {
-						this.gridPlayer[i][j].setBackground(Color.DARK_GRAY);
+						this.grid[i][j].setBackground(Color.DARK_GRAY);
 					}break;
 					case 3: {
-						this.gridPlayer[i][j].setBackground(Color.RED);
-						this.gridPlayer[i][j].setForeground(Color.WHITE);
-						this.gridPlayer[i][j].setText("X");
+						this.grid[i][j].setBackground(Color.RED);
+						this.grid[i][j].setForeground(Color.WHITE);
+						this.grid[i][j].setText("X");
 					}
 				}
 			}
