@@ -82,21 +82,21 @@ public class GridView extends JPanel implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		
-		int[][] g = (int[][])arg1;
+		CellStatus[][] g = (CellStatus[][])arg1;
 		
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
 				System.out.print(g[i][j]);
 				switch(g[i][j]) {
-					case 0: this.grid[i][j].setBackground(Color.WHITE); break;
-					case 1: {
+					case CELL_EMPTY: this.grid[i][j].setBackground(Color.WHITE); break;
+					case CELL_EMPTY_HIT: {
 						this.grid[i][j].setBackground(Color.WHITE);
 						this.grid[i][j].setText("X");
 					}break;
-					case 2: {
+					case CELL_SHIP: {
 						this.grid[i][j].setBackground(Color.DARK_GRAY);
 					}break;
-					case 3: {
+					case CELL_SHIP_HIT: {
 						this.grid[i][j].setBackground(Color.RED);
 						this.grid[i][j].setForeground(Color.WHITE);
 						this.grid[i][j].setText("X");
@@ -105,5 +105,6 @@ public class GridView extends JPanel implements Observer {
 			}
 			System.out.println();
 		}
+		
 	}
 }
