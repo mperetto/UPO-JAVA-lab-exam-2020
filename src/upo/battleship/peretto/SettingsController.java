@@ -101,6 +101,16 @@ public class SettingsController implements ActionListener {
 				 * */
 				System.out.println(((JComponent)e.getSource()).getName());
 				String dimGriglia = String.valueOf(v.cmbDimGriglia.getSelectedItem());
+				String numNavi;
+				
+				/*
+				 * Vettore contenente numero di navi scelto
+				 * 
+				 * navi[0] numero sottomarini
+				 * navi[1] numero portaerei
+				 * navi[2] numero incrociatori
+				 * */
+				int[] navi = new int[3];
 				
 				int rows, cols;
 				
@@ -110,18 +120,28 @@ public class SettingsController implements ActionListener {
 						cols = 10;
 					} break;
 					case "20x20": {
-						rows = 10;
-						cols = 10;
+						rows = 20;
+						cols = 20;
 					} break;
 					default: {
 						rows = 10;
 						cols = 10;
 					}
 				}
+				
+				navi[0] = Integer.parseInt(v.lblNumSottomarini.getText());
+				navi[1] = Integer.parseInt(v.lblNumPortaerei.getText());
+				navi[2] = Integer.parseInt(v.lblNumIncrociatori.getText());
+				
+				GameSettings settings = new GameSettings(3);
+				settings.setDimGrid(rows);
+				settings.setNumNavi(navi);
+				
+				BattleshipController controller = new BattleshipController(settings);
+				
 				JComponent comp = (JComponent) e.getSource();
 				Window win = SwingUtilities.getWindowAncestor(comp);
 				win.dispose();
-				System.out.println(((JComponent)e.getSource()).getName());
 			} break;
 			
 		}
