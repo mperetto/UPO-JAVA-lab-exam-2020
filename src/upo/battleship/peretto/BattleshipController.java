@@ -3,9 +3,12 @@ package upo.battleship.peretto;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 public class BattleshipController implements ActionListener {
@@ -56,6 +59,50 @@ public class BattleshipController implements ActionListener {
 		
 		richiediPosizNavi();
 		
+		aggiungiListenerAPulsantiGriglia(gridAIView);
+		
+	}
+	
+	private void aggiungiListenerAPulsantiGriglia(GridView v) {
+		for(int i = 0; i < 10; i++){
+			for(int j = 0; j < 10; j++){
+				v.grid[i][j].addMouseListener(
+						new MouseAdapter() {
+					        public void mouseClicked(MouseEvent e) {
+					        	
+					        	JLabel l = (JLabel)e.getSource();
+					        	String labelName = l.getName();
+					        	String[] splitted = labelName.split(";");
+					        	Integer r = Integer.parseInt(splitted[0]), c = Integer.parseInt(splitted[1]);
+					        	//press(l.getName());
+					        	System.out.println("Premuto: "+r+c);
+					        	colpisci(r, c);
+					        	v.grid[r][c].removeMouseListener(this);
+					        }
+					    }
+				);
+			}
+		}
+	}
+	
+	private void colpisci(int row, int col){
+		
+		try{
+			m.hitCell(row, col);
+			int winner = m.checkWin();
+			
+			switch(winner){
+				case 1: {
+					System.out.println("Ha vinto il Player");
+				}break;
+				case 2: {
+					System.out.println("Ha vinto l'AI");
+				}break;
+			}
+		}
+		catch(IndexOutOfBoundsException e){
+			System.out.println("Si è verificato un errore");
+		}
 	}
 	
 	private void richiediPosizNavi() {
