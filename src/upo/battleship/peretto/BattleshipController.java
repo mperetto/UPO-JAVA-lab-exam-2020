@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -19,6 +20,7 @@ public class BattleshipController implements ActionListener {
 	
 	private int totNavi;
 	private String[] tipiNavi;
+	private int dim;
 	
 	public BattleshipController(GameSettings settings) {
 		
@@ -42,6 +44,8 @@ public class BattleshipController implements ActionListener {
 			}
 		}
 		
+		dim = settings.getDimGrid();
+		
 		this.m = new BattleshipModel(
 					settings.getDimGrid(), 
 					navi[0], 
@@ -59,13 +63,11 @@ public class BattleshipController implements ActionListener {
 		
 		richiediPosizNavi();
 		
-		aggiungiListenerAPulsantiGriglia(gridAIView);
-		
 	}
 	
 	private void aggiungiListenerAPulsantiGriglia(GridView v) {
-		for(int i = 0; i < 10; i++){
-			for(int j = 0; j < 10; j++){
+		for(int i = 0; i < dim; i++){
+			for(int j = 0; j < dim; j++){
 				v.grid[i][j].addMouseListener(
 						new MouseAdapter() {
 					        public void mouseClicked(MouseEvent e) {
@@ -85,6 +87,16 @@ public class BattleshipController implements ActionListener {
 		}
 	}
 	
+	private void stopGame() {
+		for(int i = 0; i < dim; i++){
+			for(int j = 0; j < dim; j++){
+				MouseListener[] ml = gridAIView.grid[i][j].getMouseListeners();
+				if(ml.length > 0)
+					gridAIView.grid[i][j].removeMouseListener(ml[0]);
+			}
+		}
+	}
+	
 	private void colpisci(int row, int col){
 		
 		try{
@@ -93,11 +105,15 @@ public class BattleshipController implements ActionListener {
 			
 			switch(winner){
 				case 1: {
-					System.out.println("Ha vinto il Player");
+					gridView.message("<html><div style='color: red; font-size: 40px'><b>Hai Vinto !!!</b></div></html>");
 				}break;
 				case 2: {
-					System.out.println("Ha vinto l'AI");
+					gridView.message("<html><div style='color: red; font-size: 40px'><b>Hai Perso !!!</b></div></html>");
 				}break;
+			}
+			
+			if(winner != 0){
+				stopGame();
 			}
 		}
 		catch(IndexOutOfBoundsException e){
@@ -136,11 +152,12 @@ public class BattleshipController implements ActionListener {
 			totNavi--;
 		}
 		catch(IllegalStateException e){
-			System.out.println("error");
+			gridView.message("<html><div style='color: red; font-size: 20px'><b>Ops non è stato possibile posizionare la nave, riprova.</b></div></html>");
 		}
 		
 		if(totNavi == 0){
 	        d.dispose();
+	        aggiungiListenerAPulsantiGriglia(gridAIView);
 		}
 	}
 	
