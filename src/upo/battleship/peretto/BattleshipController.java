@@ -1,107 +1,121 @@
 package upo.battleship.peretto;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.SwingUtilities;
 
 public class BattleshipController implements ActionListener {
 	
 	private BattleshipModel m;
-	private SettingsView v;
+	private GridView gridView;
+	private GridAIView gridAIView;
 	
-	public BattleshipController(BattleshipModel m, SettingsView v) {
-		this.m = m;
-		this.v = v;
+	private int totNavi;
+	private String[] tipiNavi;
+	
+	public BattleshipController(GameSettings settings) {
 		
-		v.btnMenoSottomarino.addActionListener(this);
-		v.btnPiuSottomarino.addActionListener(this);
-		v.btnMenoPortaerei.addActionListener(this);
-		v.btnPiuPortaerei.addActionListener(this);
-		v.btnMenoIncrociatore.addActionListener(this);
-		v.btnPiuIncrociatore.addActionListener(this);
+		int[] navi = settings.getNumNavi();
+		totNavi = 0;
 		
-		v.btnCaricaPartita.addActionListener(this);
-		v.btnGioca.addActionListener(this);
-	}	
+		for(int i = 0; i < navi.length; i++)
+			totNavi = totNavi + navi[i];
+		
+		tipiNavi = new String[totNavi];
+		int tipiNaviIndex = 0;
+		
+		for(int i = 0; i < navi.length; i++){
+			for(int j = 0; j < navi[i]; j++){
+				switch(i){
+					case 0: tipiNavi[tipiNaviIndex] = "Sottomarino"; break;
+					case 1: tipiNavi[tipiNaviIndex] = "Portaerei"; break;
+					case 2: tipiNavi[tipiNaviIndex] = "Incrociatore"; break;
+				}
+				tipiNaviIndex++;
+			}
+		}
+		
+		this.m = new BattleshipModel(
+					settings.getDimGrid(), 
+					navi[0], 
+					navi[1], 
+					navi[2]
+				);
+		
+		GridAIModel aiModel = this.m.getGridAIModel();
+		GridPlayerModel playerModel = this.m.getGridPlayerModel();
+		
+		this.gridView = new GridView(playerModel, settings.getDimGrid());
+		this.gridAIView = new GridAIView(aiModel, settings.getDimGrid());
+		
+		gridView.jDiagbtnOk.addActionListener(this);
+		
+		richiediPosizNavi();
+		
+	}
+	
+	private void richiediPosizNavi() {
+		gridView.posizioneNave(tipiNavi);
+	}
+	
+	private void posizionaNave(JDialog d) {
+		
+		Integer riga = (Integer)gridView.jDiagcmbRiga.getSelectedItem();
+		Integer colonna = (Integer)gridView.jDiagcmbColonna.getSelectedItem();
+		String orientamento = String.valueOf(gridView.jDiagcmbOrientamento.getSelectedItem());
+		ShipOrientation orientation = ShipOrientation.HORIZONTAL;
+		
+		String tipoNave = String.valueOf(gridView.JDiagcmbNavi.getSelectedItem());
+		ShipType shipType = ShipType.PORTAEREI;
+		
+		switch(orientamento){
+			case "Orizzontale": orientation = ShipOrientation.HORIZONTAL; break;
+			case "Verticale": orientation = ShipOrientation.VERTICAL; break;
+		}
+		
+		switch(tipoNave){
+			case "Sottomarino": shipType = ShipType.SOTTOMARINO; break;
+			case "Portaerei": shipType = ShipType.PORTAEREI; break;
+			case "Incrociatore": shipType = ShipType.INCROCIATORE; break;
+		}
+		
+		try{
+			m.addShip(new ShipModel(riga, colonna, shipType, orientation));
+			gridView.JDiagcmbNavi.removeItemAt(gridView.JDiagcmbNavi.getSelectedIndex());
+			totNavi--;
+		}
+		catch(IllegalStateException e){
+			System.out.println("error");
+		}
+		
+		if(totNavi == 0){
+	        d.dispose();
+		}
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String componentName = ((JComponent)e.getSource()).getName();
-		Integer num;
 		
-		switch(componentName) {
+		Integer riga = (Integer)gridView.jDiagcmbRiga.getSelectedItem();
+		Integer colonna = (Integer)gridView.jDiagcmbColonna.getSelectedItem();
+		String orientamento = String.valueOf(gridView.jDiagcmbOrientamento.getSelectedItem());
 		
-			case "btnMenoSottomarino": {
-				num = Integer.parseInt(v.lblNumSottomarini.getText());
-				
-				if(num > 1) {
-					num--;
-					v.lblNumSottomarini.setText(num.toString());
-				}
-			} break;
-			
-			case "btnPiuSottomarino": {
-				num = Integer.parseInt(v.lblNumSottomarini.getText());
-				
-				if(num < 2) {
-					num++;
-					v.lblNumSottomarini.setText(num.toString());
-				}
-			} break;
-			
-			case "btnMenoPortaerei": {
-				num = Integer.parseInt(v.lblNumPortaerei.getText());
-				
-				if(num > 1) {
-					num--;
-					v.lblNumPortaerei.setText(num.toString());
-				}
-			} break;
-			
-			case "btnPiuPortaerei": {
-				num = Integer.parseInt(v.lblNumPortaerei.getText());
-				
-				if(num < 2) {
-					num++;
-					v.lblNumPortaerei.setText(num.toString());
-				}
-			} break;
-			
-			case "btnMenoIncrociatore": {
-				num = Integer.parseInt(v.lblNumIncrociatori.getText());
-				
-				if(num > 0) {
-					num--;
-					v.lblNumIncrociatori.setText(num.toString());
-				}
-			} break;
-			
-			case "btnPiuIncrociatore": {
-				num = Integer.parseInt(v.lblNumIncrociatori.getText());
-				
-				if(num < 2) {
-					num++;
-					v.lblNumIncrociatori.setText(num.toString());
-				}
-			} break;
-			
-			case "btnCaricaPartita": {
-				/*
-				 * To be implemented
-				 * */
-				System.out.println(((JComponent)e.getSource()).getName());
-			} break;
-			
-			case "btnGioca": {
-				/*
-				 * To be implemented
-				 * */
-				System.out.println(((JComponent)e.getSource()).getName());
-			} break;
-			
-		}
+		int index = gridView.jDiagcmbOrientamento.getSelectedIndex();
+		System.out.println(gridView.jDiagcmbOrientamento.getSelectedIndex());
+		//gridView.jDiagcmbOrientamento.removeItemAt(index);
 		
+		System.out.println("Riga: "+riga);
+		System.out.println("Colonna: "+colonna);
+		System.out.println("Orientamento: "+orientamento);
+		
+		Component component = (Component) e.getSource();
+        JDialog dialog = (JDialog) SwingUtilities.getRoot(component);
+		
+		posizionaNave(dialog);
 	}
 
 }
