@@ -15,8 +15,8 @@ public class GridAIView extends GridView{
 		
 		CellStatus[][] g = (CellStatus[][])arg1;
 		
-		for(int i = 0; i < 10; i++) {
-			for(int j = 0; j < 10; j++) {
+		for(int i = 0; i < dim; i++) {
+			for(int j = 0; j < dim; j++) {
 				System.out.print(g[i][j]);
 				switch(g[i][j]) {
 					case CELL_EMPTY_HIT: {
@@ -27,7 +27,7 @@ public class GridAIView extends GridView{
 						this.grid[i][j].setBackground(Color.RED);
 						this.grid[i][j].setForeground(Color.WHITE);
 						this.grid[i][j].setText("X");
-					}
+					}break;
 					default: {
 						this.grid[i][j].setBackground(Color.WHITE);
 					}break;
