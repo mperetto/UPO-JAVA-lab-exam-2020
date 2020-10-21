@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 
 import upo.observer.ObserverController;
@@ -25,6 +26,7 @@ public class GridView extends JPanel implements Observer {
 	JComboBox<Integer> jDiagcmbRiga;
 	JComboBox<Integer> jDiagcmbColonna;
 	JComboBox<String> jDiagcmbOrientamento;
+	JComboBox<String> JDiagcmbNavi;
 	JButton jDiagbtnOk;
 	
 	private GridModel m;
@@ -110,14 +112,17 @@ public class GridView extends JPanel implements Observer {
 		
 	}
 	
-	public void posizioneNave() {
+	public void posizioneNave(String[] tipiNavi) {
 		
 		JDialog d = new JDialog(this.f, "Battleship - Posiziona Nave");
+		this.JDiagcmbNavi = new JComboBox<>(tipiNavi);
 		
 		JPanel p = new JPanel();
 		p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 		
 		p.add(new JLabel("Posiziona nave"));
+		p.add(new JLabel("Scegli Tipo Nave"));
+		p.add(this.JDiagcmbNavi);
 		p.add(new JLabel("Scegli Riga"));
 		p.add(this.jDiagcmbRiga);
 		p.add(new JLabel("Scegli Colonna"));
@@ -126,8 +131,10 @@ public class GridView extends JPanel implements Observer {
 		p.add(this.jDiagcmbOrientamento);
 		p.add(this.jDiagbtnOk);
 		d.add(p);
-		d.setSize(300, 210);
+		d.setSize(300, 250);
+		d.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		d.setVisible(true);
+		
 	}
 	
 	@Override
@@ -135,8 +142,8 @@ public class GridView extends JPanel implements Observer {
 		
 		CellStatus[][] g = (CellStatus[][])arg1;
 		
-		for(int i = 0; i < 10; i++) {
-			for(int j = 0; j < 10; j++) {
+		for(int i = 0; i < dim; i++) {
+			for(int j = 0; j < dim; j++) {
 				System.out.print(g[i][j]);
 				switch(g[i][j]) {
 					case CELL_EMPTY: this.grid[i][j].setBackground(Color.WHITE); break;
