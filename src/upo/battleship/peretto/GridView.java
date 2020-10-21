@@ -9,9 +9,12 @@ import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import upo.observer.ObserverController;
@@ -19,19 +22,28 @@ import upo.observer.ObserverModel;
 
 public class GridView extends JPanel implements Observer {
 	
+	JComboBox<Integer> jDiagcmbRiga;
+	JComboBox<Integer> jDiagcmbColonna;
+	JComboBox<String> jDiagcmbOrientamento;
+	JButton jDiagbtnOk;
+	
 	private GridModel m;
 	protected JFrame f;
+	private int dim;
 	
 	JLabel[][] grid;
 	
 	public GridView(GridModel m, int dim) {
 		super();
 		
+		this.dim = dim;
 		this.m = m;
 		
 		this.m.addObserver(this);
 		
 		this.grid = new JLabel[dim][dim];
+		
+		this.initJDialogComponents();
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
@@ -78,6 +90,44 @@ public class GridView extends JPanel implements Observer {
 		}
 		
 		return gridPanel;
+	}
+	
+	private void initJDialogComponents() {
+		
+		String[] opzOrientamento = {"Verticale", "Orizzontale"};
+		this.jDiagcmbOrientamento = new JComboBox<>(opzOrientamento);
+		
+		Integer[] dimGrid = new Integer[dim];
+		for(Integer i = 0; i < dim; i++){
+			dimGrid[i] = i;
+		}
+		
+		this.jDiagcmbRiga = new JComboBox<>(dimGrid);
+		this.jDiagcmbColonna = new JComboBox<>(dimGrid);
+		
+		this.jDiagbtnOk = new JButton("OK");
+		
+		
+	}
+	
+	public void posizioneNave() {
+		
+		JDialog d = new JDialog(this.f, "Battleship - Posiziona Nave");
+		
+		JPanel p = new JPanel();
+		p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
+		
+		p.add(new JLabel("Posiziona nave"));
+		p.add(new JLabel("Scegli Riga"));
+		p.add(this.jDiagcmbRiga);
+		p.add(new JLabel("Scegli Colonna"));
+		p.add(this.jDiagcmbColonna);
+		p.add(new JLabel("Scegli l'orientamento"));
+		p.add(this.jDiagcmbOrientamento);
+		p.add(this.jDiagbtnOk);
+		d.add(p);
+		d.setSize(300, 210);
+		d.setVisible(true);
 	}
 	
 	@Override
