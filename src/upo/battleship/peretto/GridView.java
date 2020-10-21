@@ -1,5 +1,6 @@
 package upo.battleship.peretto;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -31,7 +32,7 @@ public class GridView extends JPanel implements Observer {
 	
 	private GridModel m;
 	protected JFrame f;
-	private int dim;
+	protected int dim;
 	
 	JLabel[][] grid;
 	
@@ -135,6 +136,20 @@ public class GridView extends JPanel implements Observer {
 		d.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		d.setVisible(true);
 		
+	}
+	
+	public void message(String message) {
+		JDialog d = new JDialog(this.f, "Battleship");
+		
+		JPanel p = new JPanel();
+		p.setLayout(new BorderLayout());
+		
+		p.add(new JLabel(message), BorderLayout.CENTER);
+		
+		d.add(p);
+		//d.setSize(300, 250);
+		d.pack();
+		d.setVisible(true);
 	}
 	
 	@Override
