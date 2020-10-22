@@ -28,6 +28,13 @@ public class AIModelTest {
 		int[] cella = new int[2];
 		int cont = 0, numeroMosse = 45;
 		
+		try{
+			aiModel.placeShip(1, 3, ShipOrientation.HORIZONTAL, 5);
+		}
+		catch(IndexOutOfBoundsException e){
+			fail("Posizionamento nave fallito");
+		}
+		
 		while(!playerModel.isTutteNaviAffondate()){
 			
 			cella = aiModel.newMove();

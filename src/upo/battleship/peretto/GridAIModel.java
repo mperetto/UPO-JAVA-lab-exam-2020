@@ -35,6 +35,9 @@ public class GridAIModel extends GridModel implements Observer {
 		
 		int[] cellaColpita = new int[2];
 		
+		if(this.isTutteNaviAffondate())
+			return null;
+		
 		if(!ai.isNaveIndividuata()){
 			
 			int[] cellaDaColpire = new int[2];
