@@ -9,6 +9,12 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 	protected int gridRows, gridCols;
 	private int celleConPartiNave;
 	
+	/**
+	 * Genera una nuova mappa di gioco
+	 * 
+	 * @param rows - totale righe matrice
+	 * @param cols - totale colonne matrice
+	 * */
 	public GridModel(int rows, int cols) {
 		this.grid = new CellStatus[rows][cols];
 		this.gridRows = rows;
@@ -87,6 +93,13 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		
 	}
 	
+	/**
+	 * Restituisce il valore della cella scelta
+	 * 
+	 * @param grid - la griglia da analizzare
+	 * @param r - la riga della griglia
+	 * @param c- la colonna della griglia
+	 * */
 	public static CellStatus getCellValue(CellStatus[][] grid, int r, int c) {
 		
 		CellStatus value = null;
@@ -126,6 +139,9 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * */
 	public void hitCell(int row, int col) throws IndexOutOfBoundsException {
 		
 		if(row < 0 || row >= this.gridRows || col < 0 || col >= this.gridCols) {
@@ -157,6 +173,14 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		
 	}
 	
+	/**
+	 * Il metodo viene richiamato dopo l'esecuzione di hitCell.
+	 * Passa il turno all'AI permettendo la scelta della cella da colpire.
+	 * 
+	 * @return int[] riga e colonna della cella colpita
+	 * 
+	 * @throws UnsupportedOperationException - nel caso la sua esecuzione non sia prevista
+	 * */
 	public abstract int[] newMove() throws UnsupportedOperationException;
 	
 	/**
@@ -188,9 +212,9 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 	}
 	
 	/**
-	 * Restituisce il numero di navi nemiche affondate fino a quel momento.
+	 * Verifica se nella griglia di gioco siano ancora presenti porzioni di nave non colpite
 	 * 
-	 * @return int il totale delle navi affondate.
+	 * @return <code>true</code> se tutte le navi sono satate affondate <code>false</code> altrimenti
 	 * */
 	public boolean isTutteNaviAffondate() {
 		return (this.celleConPartiNave == 0);

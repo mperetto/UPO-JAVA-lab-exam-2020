@@ -71,7 +71,7 @@ public class BattleshipModel {
 	}
 	
 	/**
-	 * Controlla se ho già raggiunto il limite massimo di navi che possono essere presenti nella griglia di gioco
+	 * Controlla se si è già raggiunto il limite massimo di navi che possono essere presenti nella griglia di gioco
 	 * 
 	 * @param ShipType tipo di nave su cui devo effettuare il controllo
 	 * @return <code>true</code> se ho raggiunto il limite di navi <code>false</code> altrimenti
@@ -112,6 +112,13 @@ public class BattleshipModel {
 		}
 	}
 	
+	/**
+	 * Riceve le coordinate della cella da colpire scelta dal giocatore, e colpisce la cella nella griglia AI
+	 * 
+	 * @param int row, riga scelta
+	 * @param int col, colonna scelta
+	 * @throws IndexOutOfBoundsException - nel caso la cella non possa essere colpita
+	 * */
 	public void hitCell(int row, int col) throws IndexOutOfBoundsException{
 		
 		try{

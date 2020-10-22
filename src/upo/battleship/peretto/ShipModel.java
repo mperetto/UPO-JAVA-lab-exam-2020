@@ -9,10 +9,10 @@ public class ShipModel {
 	/**
 	 * Crea un nuovo oggetto nave
 	 * 
-	 * @param int headRowCell numero riga cella di partenza
-	 * @param int headColCell numero colonna cella di partenza
-	 * @param ShipType type tipo nave
-	 * @param ShipOrientation orientation orientamento nave
+	 * @param headRowCell - numero riga cella di partenza
+	 * @param headColCell - numero colonna cella di partenza
+	 * @param type - tipo nave
+	 * @param orientation - orientamento nave
 	 * */
 	public ShipModel(int headRowCell, int headColCell, ShipType type, ShipOrientation orientation) {
 		this.positionRow = headRowCell;
