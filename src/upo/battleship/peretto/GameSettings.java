@@ -4,6 +4,11 @@ public class GameSettings {
 	private int dimGrid;
 	private int[] numNavi;
 	
+	/**
+	 * Crea un nuovo contenitore per i settaggi della partita
+	 * 
+	 * @param numeroTipiNavi - il numero di tipi di nave presenti
+	 * */
 	public GameSettings(int numeroTipiNavi) {
 		numNavi = new int[numeroTipiNavi];
 	}
@@ -53,6 +58,4 @@ public class GameSettings {
 	public void setNumNavi(int[] numNavi) {
 		this.numNavi = numNavi;
 	}
-	
-	
 }

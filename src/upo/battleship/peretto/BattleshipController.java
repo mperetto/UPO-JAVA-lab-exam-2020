@@ -22,6 +22,11 @@ public class BattleshipController implements ActionListener {
 	private String[] tipiNavi;
 	private int dim;
 	
+	/**
+	 * Crea un nuovo controllerm per la partita
+	 * 
+	 * @param settings - impostazioni della partita da creare
+	 * */
 	public BattleshipController(GameSettings settings) {
 		
 		int[] navi = settings.getNumNavi();
@@ -65,6 +70,11 @@ public class BattleshipController implements ActionListener {
 		
 	}
 	
+	/**
+	 * Aggiunge un ascoltatore ad ogni cella della griglia
+	 * 
+	 * @param v - vista griglia
+	 * */
 	private void aggiungiListenerAPulsantiGriglia(GridView v) {
 		for(int i = 0; i < dim; i++){
 			for(int j = 0; j < dim; j++){
@@ -87,6 +97,9 @@ public class BattleshipController implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Rimuove tutti gli ascoltatori presenti sulle celle della griglia
+	 * */
 	private void stopGame() {
 		for(int i = 0; i < dim; i++){
 			for(int j = 0; j < dim; j++){
@@ -97,6 +110,12 @@ public class BattleshipController implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Colpisce la cella scelta dal giocatore
+	 * 
+	 * @param row - la riga della cella
+	 * @param col - la colonna della cella
+	 * */
 	private void colpisci(int row, int col){
 		
 		try{
@@ -121,10 +140,18 @@ public class BattleshipController implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Richiede la visualizzazione della finestra utilizzata per posizionare una nave
+	 * */
 	private void richiediPosizNavi() {
 		gridView.posizioneNave(tipiNavi);
 	}
 	
+	/**
+	 * Tenta di posizionare la nave nella posizione scelta restituendo un messaggio di errore in caso di posizionamento fallito
+	 * 
+	 * @param d - il pannello usato per recuperare le informazioni sulla nave da posizionare
+	 * */
 	private void posizionaNave(JDialog d) {
 		
 		Integer riga = (Integer)gridView.jDiagcmbRiga.getSelectedItem();

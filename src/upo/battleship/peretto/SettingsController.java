@@ -12,6 +12,11 @@ public class SettingsController implements ActionListener {
 	
 	private SettingsView v;
 	
+	/**
+	 * Crea un nuovo controller per la finestra dei settaggi della partita
+	 * 
+	 * @param v - la vista dei settaggi della partita da creare
+	 * */
 	public SettingsController(SettingsView v) {
 		
 		this.v = v;
