@@ -341,7 +341,7 @@ public class GridAIModel extends GridModel implements Observer {
 		
 	}
 	
-	public CellStatus[] getCellAdj(int r, int c) {
+	private CellStatus[] getCellAdj(int r, int c) {
 		
 		CellStatus[] cAdj = new CellStatus[4];
 		
