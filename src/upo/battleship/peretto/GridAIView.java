@@ -5,11 +5,20 @@ import java.util.Observable;
 
 public class GridAIView extends GridView{
 	
+	/**
+	 * Crea una nuova vista per la griglia AI
+	 * 
+	 * @param m - il modello che gestisce la griglia
+	 * @param dim - la dimensione della griglia da creare
+	 * */
 	public GridAIView(GridModel m, int dim) {
 		super(m, dim);
 		this.f.setTitle("Griglia AI");
 	}
 	
+	/**
+	 * Aggiorna la griglia visualizzata mostrando solo lo stato delle celle colpite
+	 * */
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		

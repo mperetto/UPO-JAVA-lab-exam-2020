@@ -36,6 +36,12 @@ public class GridView extends JPanel implements Observer {
 	
 	JLabel[][] grid;
 	
+	/**
+	 * Crea una nuova finestra griglia
+	 * 
+	 * @param m - il modello che gestisce la griglia
+	 * @param dim - la dimensione della griglia da creare
+	 * */
 	public GridView(GridModel m, int dim) {
 		super();
 		
@@ -59,6 +65,14 @@ public class GridView extends JPanel implements Observer {
 	    f.setVisible(true);
 	}
 	
+	/**
+	 * Genera un nuovo pannello griglia
+	 * 
+	 * @param dim - la dimensione della griglia da generare
+	 * @param grid - matrice della griglia  in cui creare le celle
+	 * 
+	 * @return JPanel il pannello generato
+	 * */
 	private JPanel generateGrid(int dim, JLabel[][] grid) {
 		JPanel gridPanel = new JPanel();
 		gridPanel.setLayout(new GridLayout(dim+1, dim+1));
@@ -95,6 +109,9 @@ public class GridView extends JPanel implements Observer {
 		return gridPanel;
 	}
 	
+	/**
+	 * inizializza i componenti della finestra con le informazioni per posizionare una nave
+	 * */
 	private void initJDialogComponents() {
 		
 		String[] opzOrientamento = {"Verticale", "Orizzontale"};
@@ -113,6 +130,11 @@ public class GridView extends JPanel implements Observer {
 		
 	}
 	
+	/**
+	 * Crea una finestra per permettere al giocatore di scegliere dove posizionare la nave
+	 * 
+	 * @param tipiNavi - stringa contenente i nomi dei tipi di nave che l'utente può aggiungere
+	 * */
 	public void posizioneNave(String[] tipiNavi) {
 		
 		JDialog d = new JDialog(this.f, "Battleship - Posiziona Nave");
@@ -138,6 +160,11 @@ public class GridView extends JPanel implements Observer {
 		
 	}
 	
+	/**
+	 * Crea una nuova finestra mostrando al giocatore la stringa fornita
+	 * 
+	 * @param message - stringa contenente il messaggio da mostrare
+	 * */
 	public void message(String message) {
 		JDialog d = new JDialog(this.f, "Battleship");
 		
