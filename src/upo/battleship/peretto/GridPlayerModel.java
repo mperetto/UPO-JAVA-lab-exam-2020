@@ -8,21 +8,6 @@ public class GridPlayerModel extends GridModel {
 	public GridPlayerModel(int rows, int cols) {
 		super(rows, cols);
 	}
-	
-	
-
-	/*@Override
-	public void hitCell(int row, int col) throws IndexOutOfBoundsException {
-		
-	}*/
-	
-	public void changeMessage(String message) 
-    {
-        setChanged();
-        notifyObservers(message);
-    }
-
-
 
 	@Override
 	public int[] newMove() throws UnsupportedOperationException {
