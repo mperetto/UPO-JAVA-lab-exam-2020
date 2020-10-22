@@ -18,22 +18,15 @@ public class GridAIModelTest {
 		this.aiModel = new GridAIModel(10, 10, playerModel);
 	}
 	
-	@Ignore
+	@Test
 	public void testGridAIModel() {
 		
 		this.playerModel = new GridPlayerModel(10, 10);
 		this.aiModel = new GridAIModel(10, 10, playerModel);
+		
+		assert(this.aiModel != null);
+		assert(this.aiModel instanceof GridAIModel);
 				
-	}
-
-	@Test
-	public void testNewMove() {
-		//this.aiModel.newMove()
-	}
-
-	@Ignore
-	public void testUpdate() {
-		fail("Not yet implemented");
 	}
 
 	@Test
