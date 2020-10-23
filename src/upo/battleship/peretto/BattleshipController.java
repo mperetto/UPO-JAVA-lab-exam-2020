@@ -58,11 +58,10 @@ public class BattleshipController implements ActionListener {
 					navi[2]
 				);
 		
-		GridAIModel aiModel = this.m.getGridAIModel();
-		GridPlayerModel playerModel = this.m.getGridPlayerModel();
+		BattleshipView view = new BattleshipView(this.m, this.dim);
 		
-		this.gridView = new GridView(playerModel, settings.getDimGrid());
-		this.gridAIView = new GridAIView(aiModel, settings.getDimGrid());
+		this.gridView = view.getGridPlayerView();
+		this.gridAIView = view.getGridAIView();
 		
 		gridView.jDiagbtnOk.addActionListener(this);
 		
