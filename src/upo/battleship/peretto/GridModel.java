@@ -32,9 +32,6 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 	 * */	
 	public void placeShip(int row, int col, ShipOrientation orientation, int dim) throws IndexOutOfBoundsException {
 		
-		/*this.gridRows = grid.length;
-		this.gridCols = grid[0].length;*/
-		
 		if(row < 0 || row >= gridRows || col < 0 || col >= gridCols) {
 			throw new IndexOutOfBoundsException("La cella non esiste all'interno della griglia");
 		}
@@ -42,14 +39,12 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 		switch(orientation) {//	Controllo se la nave può essere posizionata all'ìnterno della griglia
 			case HORIZONTAL: {
 				if(gridCols < (col+dim)) {
-					System.out.println("1");
 					throw new IndexOutOfBoundsException("Impossibile posizionare nave, esce dalla mappa di gioco");
 					
 				}
 				int i = dim, c = col;
 				while(i > 0){
 					if(this.grid[row][c] != CellStatus.CELL_EMPTY || !isNeighborCellEmpty(this.grid, row, c)) {
-						System.out.println("2");
 						throw new IndexOutOfBoundsException("Impossibile posizionare nave, cella già occupata");
 					}
 					i--;
@@ -59,13 +54,11 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 			
 			case VERTICAL: {
 				if(gridRows < row+dim) {
-					System.out.println("3");
 					throw new IndexOutOfBoundsException("Impossibile posizionare nave, esce dalla mappa di gioco");
 				}
 				int i = dim, r = row;
 				while(i > 0){
 					if(this.grid[r][col] != CellStatus.CELL_EMPTY || !isNeighborCellEmpty(this.grid, r, col)) {
-						System.out.println("4");
 						throw new IndexOutOfBoundsException("Impossibile posizionare nave, cella già occupata");
 					}
 					i--;
@@ -156,10 +149,7 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 			} break;
 			default:
 				break;
-		}
-		
-		CellStatus[][] filteredGrid = FilterGrid();
-		
+		}		
 
 		this.setChanged();
 		this.notifyObservers(this.grid);
@@ -182,34 +172,6 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 	 * @throws UnsupportedOperationException - nel caso la sua esecuzione non sia prevista
 	 * */
 	public abstract int[] newMove() throws UnsupportedOperationException;
-	
-	/**
-	 * Filtra la griglia nascondendo il posizionamento delle navi non colpite,
-	 * 
-	 * @return una nuova griglia filtrata
-	 * */
-	private CellStatus[][] FilterGrid() {
-		
-		CellStatus[][] g = new CellStatus[this.gridRows][this.gridCols];
-		
-		for(CellStatus[] row : g) {
-			Arrays.fill(row, CellStatus.CELL_EMPTY);
-		}
-		
-		for(int i = 0; i < this.gridRows; i++) {
-			for(int j = 0; j < this.gridCols; j++){
-				
-				switch(this.grid[i][j]){
-					case CELL_EMPTY_HIT: g[i][j] = this.grid[i][j]; break;
-					case CELL_SHIP_HIT: g[i][j] = this.grid[i][j]; break;
-					default:
-						break;
-				}
-			}
-		}
-		
-		return g;
-	}
 	
 	/**
 	 * Verifica se nella griglia di gioco siano ancora presenti porzioni di nave non colpite
