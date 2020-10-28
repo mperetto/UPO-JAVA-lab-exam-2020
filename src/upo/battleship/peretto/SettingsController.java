@@ -3,7 +3,6 @@ package upo.battleship.peretto;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
@@ -28,7 +27,6 @@ public class SettingsController implements ActionListener {
 		v.btnMenoIncrociatore.addActionListener(this);
 		v.btnPiuIncrociatore.addActionListener(this);
 		
-		v.btnCaricaPartita.addActionListener(this);
 		v.btnGioca.addActionListener(this);
 	}	
 	
@@ -93,20 +91,8 @@ public class SettingsController implements ActionListener {
 				}
 			} break;
 			
-			case "btnCaricaPartita": {
-				/*
-				 * To be implemented
-				 * */
-				System.out.println(((JComponent)e.getSource()).getName());
-			} break;
-			
 			case "btnGioca": {
-				/*
-				 * To be implemented
-				 * */
-				System.out.println(((JComponent)e.getSource()).getName());
 				String dimGriglia = String.valueOf(v.cmbDimGriglia.getSelectedItem());
-				String numNavi;
 				
 				/*
 				 * Vettore contenente numero di navi scelto

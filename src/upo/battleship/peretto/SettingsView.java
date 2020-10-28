@@ -34,8 +34,6 @@ public class SettingsView extends JPanel{
 		cmbDimGriglia = new JComboBox<>(dimensioni);
 		
 		this.add(cmbDimGriglia);
-		cbTempo = new JCheckBox("Partita a tempo");
-		this.add(cbTempo);
 		
 		this.add(new JLabel("\n"));
 		label = new JLabel("Navi");
@@ -106,9 +104,6 @@ public class SettingsView extends JPanel{
 		panelBoxXAxis = new JPanel();
 		panelBoxXAxis.setLayout(new BoxLayout(panelBoxXAxis, BoxLayout.X_AXIS));
 		
-		btnCaricaPartita = new JButton("Carica Partita Salvata");
-		setBtnName(btnCaricaPartita, "btnCaricaPartita");
-		panelBoxXAxis.add(btnCaricaPartita);
 		btnGioca = new JButton("Gioca");
 		setBtnName(btnGioca, "btnGioca");
 		panelBoxXAxis.add(btnGioca);
