@@ -117,6 +117,12 @@ public class SettingsView extends JPanel{
 	    f.setVisible(true);
 	}
 	
+	/**
+	 * Imposto il nome fornito al pulsante scelto
+	 * 
+	 * @param btn - il pulsante
+	 * @param name - il nome da assegnare
+	 * */
 	private void setBtnName(JButton btn, String name) {
 		btn.setName(name);
 	}
