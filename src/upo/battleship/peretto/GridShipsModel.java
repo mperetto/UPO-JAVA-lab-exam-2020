@@ -26,9 +26,4 @@ public interface GridShipsModel {
 	 * */
 	public void hitCell(int row, int col) throws IndexOutOfBoundsException;
 	
-	/**
-	 * Colpisce una cella nella griglia avversaria
-	 * */
-	//public void newMove();
-	
 }
