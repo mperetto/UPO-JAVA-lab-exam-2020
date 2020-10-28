@@ -7,7 +7,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
@@ -85,8 +84,7 @@ public class BattleshipController implements ActionListener {
 					        	String labelName = l.getName();
 					        	String[] splitted = labelName.split(";");
 					        	Integer r = Integer.parseInt(splitted[0]), c = Integer.parseInt(splitted[1]);
-					        	//press(l.getName());
-					        	System.out.println("Premuto: "+r+c);
+					        	
 					        	colpisci(r, c);
 					        	v.grid[r][c].removeMouseListener(this);
 					        }
@@ -135,7 +133,7 @@ public class BattleshipController implements ActionListener {
 			}
 		}
 		catch(IndexOutOfBoundsException e){
-			System.out.println("Si è verificato un errore");
+			gridView.message("<html><div style='color: red; font-size: 40px'><b>Si è verificato un errore: "+e.getMessage()+"</b></div></html>");
 		}
 	}
 	
@@ -189,18 +187,6 @@ public class BattleshipController implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		Integer riga = (Integer)gridView.jDiagcmbRiga.getSelectedItem();
-		Integer colonna = (Integer)gridView.jDiagcmbColonna.getSelectedItem();
-		String orientamento = String.valueOf(gridView.jDiagcmbOrientamento.getSelectedItem());
-		
-		int index = gridView.jDiagcmbOrientamento.getSelectedIndex();
-		System.out.println(gridView.jDiagcmbOrientamento.getSelectedIndex());
-		//gridView.jDiagcmbOrientamento.removeItemAt(index);
-		
-		System.out.println("Riga: "+riga);
-		System.out.println("Colonna: "+colonna);
-		System.out.println("Orientamento: "+orientamento);
 		
 		Component component = (Component) e.getSource();
         JDialog dialog = (JDialog) SwingUtilities.getRoot(component);
