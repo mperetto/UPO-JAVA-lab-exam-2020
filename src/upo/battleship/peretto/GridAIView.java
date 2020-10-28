@@ -26,7 +26,7 @@ public class GridAIView extends GridView{
 		
 		for(int i = 0; i < dim; i++) {
 			for(int j = 0; j < dim; j++) {
-				System.out.print(g[i][j]);
+				
 				switch(g[i][j]) {
 					case CELL_EMPTY_HIT: {
 						this.grid[i][j].setBackground(Color.WHITE);
@@ -42,7 +42,7 @@ public class GridAIView extends GridView{
 					}break;
 				}
 			}
-			System.out.println();
+			
 		}
 	}
 	

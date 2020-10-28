@@ -174,7 +174,7 @@ public class GridView extends JPanel implements Observer {
 		p.add(new JLabel(message), BorderLayout.CENTER);
 		
 		d.add(p);
-		//d.setSize(300, 250);
+		
 		d.pack();
 		d.setVisible(true);
 	}
@@ -186,7 +186,7 @@ public class GridView extends JPanel implements Observer {
 		
 		for(int i = 0; i < dim; i++) {
 			for(int j = 0; j < dim; j++) {
-				System.out.print(g[i][j]);
+				
 				switch(g[i][j]) {
 					case CELL_EMPTY: this.grid[i][j].setBackground(Color.WHITE); break;
 					case CELL_EMPTY_HIT: {
@@ -203,7 +203,7 @@ public class GridView extends JPanel implements Observer {
 					}
 				}
 			}
-			System.out.println();
+			
 		}
 		
 	}
