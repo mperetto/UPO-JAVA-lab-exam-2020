@@ -1,6 +1,5 @@
 package upo.battleship.peretto;
 
-import java.lang.Math;
 import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
@@ -361,11 +360,9 @@ public class GridAIModel extends GridModel implements Observer {
 		private ShipOrientation orientamento;
 		private int estrNaveInd;
 		private boolean affondata;
-		private int dimGrid;
 		
 		public AI(int dimGrid){
 			this.init();
-			this.dimGrid = dimGrid;
 		}
 		
 		public void init() {
