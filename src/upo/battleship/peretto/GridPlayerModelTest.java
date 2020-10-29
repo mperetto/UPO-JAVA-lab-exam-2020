@@ -4,6 +4,13 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * La classe va a testare i metodi implementati all'interno della classe GridPlayerModel.
+ * 
+ * @see GridPlayerModel
+ * 
+ * @author Marco Peretto
+ * */
 public class GridPlayerModelTest {
 
 	@Test

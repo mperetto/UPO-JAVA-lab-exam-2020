@@ -1,5 +1,10 @@
 package upo.battleship.peretto;
 
+/**
+ * La classe permette di gestire le caratteristiche di una nave, quali tipo, dimensione, posizione, orientamento.
+ * 
+ * @author Marco Peretto
+ * */
 public class ShipModel {
 	private ShipType type;
 	private ShipOrientation orientation;

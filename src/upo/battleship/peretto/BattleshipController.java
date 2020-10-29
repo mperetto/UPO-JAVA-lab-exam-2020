@@ -11,6 +11,15 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
+/**
+ * La classe genera un controller della partita permettendo il posizionamento delle navi e il colpimento delle celle.
+ * Comunica con il modello recuperando le informazioni dalle viste delle griglie.
+ * 
+ * @see GridView
+ * @see BattleshipModel
+ * 
+ * @author Marco Peretto
+ * */
 public class BattleshipController implements ActionListener {
 	
 	private BattleshipModel m;

@@ -5,6 +5,13 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * La classe testa il corretto funzionamento della classe BattlshipModel
+ * 
+ * @see BattleshipModel
+ * 
+ * @author Marco Peretto
+ */
 public class BattleshipModelTest {
 	
 	private BattleshipModel model;

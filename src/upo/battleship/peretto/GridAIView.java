@@ -3,6 +3,13 @@ package upo.battleship.peretto;
 import java.awt.Color;
 import java.util.Observable;
 
+/**
+ * La classe estende GridView modificando il modo in cui viene visualizzata la griglia.
+ * 
+ * @see GridView
+ * 
+ * @author Marco Peretto
+ * */
 public class GridAIView extends GridView{
 	
 	/**

@@ -1,5 +1,10 @@
 package upo.battleship.peretto;
 
+/**
+ * La classe permette di gestire lo stato di una partita di Battaglia navale fornendo tutti i metodi necessari.
+ * 
+ * @author Marco Peretto
+ * */
 public class BattleshipModel {
 	
 	protected int dimGrid;

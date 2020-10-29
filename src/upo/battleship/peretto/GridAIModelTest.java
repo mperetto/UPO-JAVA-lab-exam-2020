@@ -6,6 +6,15 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+/**
+ * La classe va a testare il corretto funzionamento dei metodi presenti nella classe astratta GridModel tramite l'utilizzo della classe GridAIModel.
+ * 
+ * @see GridModel
+ * @see GridAIModel
+ * 
+ * @author Marco Peretto
+ *
+ */
 public class GridAIModelTest {
 	
 	GridPlayerModel playerModel;

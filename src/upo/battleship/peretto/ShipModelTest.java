@@ -5,6 +5,13 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * La classe si occupa di testare il corretto funzionamento della classe ShipModel.
+ * 
+ * @see ShipModel
+ * 
+ * @author Marco Peretto
+ * */
 public class ShipModelTest {
 	
 	ShipModel ship;

@@ -1,5 +1,10 @@
 package upo.battleship.peretto;
 
+/**
+ * La classe permette di gestire una griglia di gioco per il giocatore umano.
+ * 
+ * @author Marco Peretto
+ * */
 public class GridPlayerModel extends GridModel {
 	
 	/**

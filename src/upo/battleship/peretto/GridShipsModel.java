@@ -1,5 +1,10 @@
 package upo.battleship.peretto;
 
+/**
+ * L'interfaccia descrive i metodi base che le griglia devono implementare
+ * 
+ * @author Marco Peretto
+ * */
 public interface GridShipsModel {
 	
 	/**

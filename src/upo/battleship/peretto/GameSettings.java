@@ -1,5 +1,10 @@
 package upo.battleship.peretto;
 
+/**
+ * La classe contiene tutte le informazioni utili a generare una nuova partita.
+ * 
+ * @author Marco Peretto
+ * */
 public class GameSettings {
 	private int dimGrid;
 	private int[] numNavi;

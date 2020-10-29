@@ -1,11 +1,13 @@
 package upo.battleship.peretto;
 
 /**
- * @author Marco Peretto
- * 
  * Questa classe gestisce la vista dell'applicazione.
- * Mette a disposizione tre finestre che permettono nello specifico di gestire le impostazioni della partita, di visualizzare la mappa di gioco e di posizionare le rispetttive navi.
+ * La classe genera le due viste delle griglie, una per la griglia del giocatore l'altra per la griglia dell'AI.
  * 
+ * @see GridView
+ * @see GridAIView
+ * 
+ * @author Marco Peretto
  * */
 public class BattleshipView {
 

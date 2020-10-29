@@ -22,6 +22,11 @@ import javax.swing.border.Border;
 import upo.observer.ObserverController;
 import upo.observer.ObserverModel;
 
+/**
+ * La classe genera una vista grafica della griglia di un giocatore della partita.
+ * 
+ * @author Marco Peretto
+ * */
 public class GridView extends JPanel implements Observer {
 	
 	JComboBox<Integer> jDiagcmbRiga;

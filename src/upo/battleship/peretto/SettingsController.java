@@ -7,6 +7,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
+/**
+ * La classe genera un controller della finestra contenente le impostazioni della partita.
+ * 
+ * @see SettingsView
+ * @author Marco Peretto
+ * */
 public class SettingsController implements ActionListener {
 	
 	private SettingsView v;

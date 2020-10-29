@@ -3,6 +3,11 @@ package upo.battleship.peretto;
 import java.util.Arrays;
 import java.util.Observable;
 
+/**
+ * La classe fornisce i metodi base per gestire una griglia di gioco.
+ * 
+ * @author Marco Peretto
+ * */
 public abstract class GridModel extends Observable implements GridShipsModel {
 	
 	protected CellStatus[][] grid;

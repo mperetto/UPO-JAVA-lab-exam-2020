@@ -5,13 +5,25 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Random; 
 
+/**
+ * La classe permette di gestire una griglia di gioco per la CPU.
+ * 
+ * @author Marco Peretto
+ * */
 public class GridAIModel extends GridModel implements Observer {
 	
 	private CellStatus[][] enemyGrid;
 	private GridPlayerModel playerModel;
 	private AI ai;
 	private Random randGenerator;
-
+	
+	/**
+	 * Genero una nuova griglia di gioco per la CPU.
+	 * 
+	 * @param rows - numero di righe della matrice.
+	 * @param cols - numero di colonne della matrice.
+	 * @param playerModel - griglia del giocatore.
+	 * */
 	public GridAIModel(int rows, int cols, GridPlayerModel playerModel) {
 		super(rows, cols);
 		this.enemyGrid = new CellStatus[rows][cols];
@@ -263,6 +275,11 @@ public class GridAIModel extends GridModel implements Observer {
 		this.randGenerator = new Random(seed);
 	}
 	
+	/**
+	 * Genero una cella casuale compresa nel range della griglia di gioco.
+	 * 
+	 * @return vettore contenente le coordinate della cella generata.
+	 * */
 	private int[] generaCellaCasuale() {
 		int range = this.gridCols; // numeri da 0 a numero di colonne/righe della matrice
 		int[] cell = new int[2];
@@ -340,6 +357,18 @@ public class GridAIModel extends GridModel implements Observer {
 		
 	}
 	
+	/**
+	 * Il metodo fornisce lo stato delle quattro celle adiacenti (N, S, E, O) alla cella fornita.
+	 * 
+	 * @param r - riga della cella considerata.
+	 * @param c - colonna della cella considerata.
+	 * 
+	 * @return vettore contenente le quattro celle adiacenti nel seguante ordine
+	 * 			[0] cella Nord,
+	 * 			[1] cella Est,
+	 * 			[2] cella Sud,
+	 * 			[3] cella Ovest
+	 * */
 	private CellStatus[] getCellAdj(int r, int c) {
 		
 		CellStatus[] cAdj = new CellStatus[4];
@@ -352,6 +381,9 @@ public class GridAIModel extends GridModel implements Observer {
 		return cAdj;
 	}
 	
+	/**
+	 * Classe utilizzata per mantenere le informazioni sullo stato raggiunto dalla CPU per i colpi sulla griglia nemica.
+	 * */
 	class AI {
 		
 		private boolean naveIndividuata;
@@ -361,10 +393,18 @@ public class GridAIModel extends GridModel implements Observer {
 		private int estrNaveInd;
 		private boolean affondata;
 		
+		/**
+		 * Creo una nuova istanza della classe
+		 * 
+		 * @param dimGrid - dimensione della griglia.
+		 * */
 		public AI(int dimGrid){
 			this.init();
 		}
 		
+		/**
+		 * Inizializzo lo stato dell'AI resettando tutti i valori.
+		 * */
 		public void init() {
 			naveIndividuata = false;
 			cellaConNavePrecColpita = new int[2];
@@ -376,52 +416,112 @@ public class GridAIModel extends GridModel implements Observer {
 			affondata = false;
 		}
 		
+		/**
+		 * Ritorna le coordinate dell'ultima cella contenente nave colpita.
+		 * 
+		 * @return vettore contenente le coordinate della cella.
+		 * */
 		public int[] getCellaConNavePrecColpita() {
 			return cellaConNavePrecColpita;
 		}
-
+		
+		/**
+		 * Setta le coordinate dell'ultima cella contenente nave colpita.
+		 * 
+		 * @param vettore contenente coordinate cella.
+		 * */
 		public void setCellaConNavePrecColpita(int[] cellaConNavePrecColpita) {
 			this.cellaConNavePrecColpita[0] = cellaConNavePrecColpita[0];
 			this.cellaConNavePrecColpita[1] = cellaConNavePrecColpita[1];
 		}
-
+		
+		/**
+		 * Ritorna le coordinate della prima cella contenente nave colpita.
+		 * 
+		 * @return vettore contenente le coordinate della cella.
+		 * */
 		public int[] getPrimaCellaColpita() {
 			return primaCellaColpita;
 		}
-
+		
+		/**
+		 * Setta le coordinate della prima cella contenente nave colpita.
+		 * 
+		 * @param vettore contenente coordinate cella.
+		 * */
 		public void setPrimaCellaColpita(int[] primaCellaColpita) {
 			this.primaCellaColpita[0] = primaCellaColpita[0];
 			this.primaCellaColpita[1] = primaCellaColpita[1];
 		}
 
+		/**
+		 * Ritorna l'orientamento della nave individuata che si sta cercando di affondare.
+		 * 
+		 * @return orientamento della nave, <code>null</code> se non ho individuato l'orientamento.
+		 * */
 		public ShipOrientation getOrientamento() {
 			return orientamento;
 		}
 
+		/**
+		 * Setta l'orientamento della nave.
+		 * 
+		 * @param orientamento - orientamento della nave individuata.
+		 * */
 		public void setOrientamento(ShipOrientation orientamento) {
 			this.orientamento = orientamento;
 		}
 
+		/**
+		 * Ritorna il numero di estramità della nave individuate.
+		 * 
+		 * @return numero di estremità individuate.
+		 * */
 		public int getEstrNaveInd() {
 			return estrNaveInd;
 		}
 
+		/**
+		 * Setta le estremità della nave individuata.
+		 * 
+		 * @param estrNaveInd - numero di estremità individuate.
+		 * */
 		public void setEstrNaveInd(int estrNaveInd) {
 			this.estrNaveInd = estrNaveInd;
 		}
 
+		/**
+		 * Restituisce se la nave è affondata oppure no.
+		 * 
+		 * @return <code>true</code> se la nave è stata affondata, <code>false</code> altrimenti.
+		 * */
 		public boolean isAffondata() {
 			return affondata;
 		}
-
+		
+		/**
+		 * Setta se la nave è stata affondata.
+		 * 
+		 * @param affondata - stato della nave.
+		 * */
 		public void setAffondata(boolean affondata) {
 			this.affondata = affondata;
 		}
 
+		/**
+		 * Setto se la nave è stata individuata oppure no.
+		 * 
+		 * @param naveIndividuata - stato di individuazione della nave.
+		 * */
 		public void setNaveIndividuata(boolean naveIndividuata) {
 			this.naveIndividuata = naveIndividuata;
 		}
 		
+		/**
+		 * Restituisce se la nave è stata individuata oppure no.
+		 * 
+		 * @return <code>true</code> se la nave è stata individuata, <code>false</code> altrimenti.
+		 * */
 		public boolean isNaveIndividuata() {
 			return naveIndividuata;
 		}

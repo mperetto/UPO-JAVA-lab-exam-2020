@@ -10,6 +10,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * La classe genera una vista per visualizzare una finestra contenente le impostazioni della partita.
+ * 
+ * @author Marco Peretto
+ * */
 public class SettingsView extends JPanel{
 	
 	final JComboBox<String> cmbDimGriglia;
@@ -19,6 +24,9 @@ public class SettingsView extends JPanel{
 	JCheckBox cbTempo;
 	JFrame f = new JFrame("BattleShip");
 	
+	/**
+	 * Genera una nuova finestra settaggi per la partita.
+	 * */
 	public SettingsView() {
 		super();
 		BoxLayout layoutYAxis = new BoxLayout(this, BoxLayout.Y_AXIS);

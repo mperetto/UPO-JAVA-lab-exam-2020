@@ -5,6 +5,11 @@ import java.util.LinkedList;
 
 import org.junit.Test;
 
+/**
+ * La classe testa il corretto funzionamento dell'AI all'interno del gioco.
+ * 
+ * @author Marco Peretto
+ * */
 public class AIModelTest {
 	
 	GridAIModel aiModel;
