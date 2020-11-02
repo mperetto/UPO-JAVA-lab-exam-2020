@@ -134,8 +134,4 @@ public class SettingsView extends JPanel{
 	private void setBtnName(JButton btn, String name) {
 		btn.setName(name);
 	}
-	
-	public static void main(String[] args) {
-		new SettingsView();
-	}
 }
