@@ -172,7 +172,7 @@ public abstract class GridModel extends Observable implements GridShipsModel {
 	 * Il metodo viene richiamato dopo l'esecuzione di hitCell.
 	 * Passa il turno all'AI permettendo la scelta della cella da colpire.
 	 * 
-	 * @return int[] riga e colonna della cella colpita
+	 * @return riga e colonna della cella colpita
 	 * 
 	 * @throws UnsupportedOperationException - nel caso la sua esecuzione non sia prevista
 	 * */

@@ -21,7 +21,7 @@ public class GameSettings {
 	/**
 	 * ritorna la dimensione della griglia
 	 * 
-	 * @return int dimensione della griglia
+	 * @return dimensione della griglia
 	 * */
 	public int getDimGrid() {
 		return dimGrid;
@@ -30,7 +30,7 @@ public class GameSettings {
 	/**
 	 * imposta la dimensione della griglia
 	 * 
-	 * @param int dimGrid dimensione della griglia
+	 * @param dimGrid dimensione della griglia
 	 * */
 	public void setDimGrid(int dimGrid) {
 		this.dimGrid = dimGrid;
@@ -39,7 +39,7 @@ public class GameSettings {
 	/**
 	 * ritorna il numero di navi per ogni tipo
 	 * 
-	 * @return int[] numNavi vettore contenente numero di navi per ogni tipo
+	 * @return numNavi vettore contenente numero di navi per ogni tipo
 	 * 
 	 * Ordine per i tipi
 	 * [0] numero sottomarini
@@ -53,7 +53,7 @@ public class GameSettings {
 	/**
 	 * imposta il numero di navi per ogni tipo
 	 * 
-	 * @param int[] numNavi vettore contenente numero di navi per ogni tipo
+	 * @param numNavi vettore contenente numero di navi per ogni tipo
 	 * 
 	 * Ordine per i tipi
 	 * [0] numero sottomarini

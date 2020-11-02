@@ -17,10 +17,10 @@ public class BattleshipModel {
 	 * Crea un nuovo modello per la gestione del gioco,
 	 * setta la dimensione della mappa di gioco il tipo e numero di navi.
 	 * 
-	 * @param int dimGrid dimensione griglia
-	 * @param int numSottomarini numero di sottomarini
-	 * @param int numPortaerei numero di portaerei
-	 * @param int numIncrociatori numero incrociatori
+	 * @param dimGrid - dimensione griglia
+	 * @param numSottomarini - numero di sottomarini
+	 * @param numPortaerei - numero di portaerei
+	 * @param numIncrociatori - numero incrociatori
 	 * */
 	public BattleshipModel(int dimGrid, int numSottomarini, int numPortaerei, int numIncrociatori) {
 		this.numSottomarini = numSottomarini;
@@ -39,7 +39,7 @@ public class BattleshipModel {
 	 * Aggiunge una nave alla griglia di gioco del giocatore umano,
 	 * Simultaneamente aggiunge lo stesso tipo di nave alla griglia AI
 	 * 
-	 * @param ShipModel oggetto nave
+	 * @param s - oggetto nave
 	 * @throws IllegalStateException in caso la nave non possa essere posizionata
 	 * */
 	public void addShip(ShipModel s) throws IllegalStateException {
@@ -78,7 +78,7 @@ public class BattleshipModel {
 	/**
 	 * Controlla se si è già raggiunto il limite massimo di navi che possono essere presenti nella griglia di gioco
 	 * 
-	 * @param ShipType tipo di nave su cui devo effettuare il controllo
+	 * @param sT - tipo di nave su cui devo effettuare il controllo
 	 * @return <code>true</code> se ho raggiunto il limite di navi <code>false</code> altrimenti
 	 * */
 	private boolean isFullOf(ShipType sT) {
@@ -102,7 +102,7 @@ public class BattleshipModel {
 	/**
 	 * Controlla se un giocatore ha affondato tutte le navi nemiche
 	 * 
-	 * @return int 0 (nessun vincitore), 1 (vincitore Player), 2 (vincitore AI)
+	 * @return 0 (nessun vincitore), 1 (vincitore Player), 2 (vincitore AI)
 	 * */
 	public int checkWin() {
 		
@@ -120,8 +120,8 @@ public class BattleshipModel {
 	/**
 	 * Riceve le coordinate della cella da colpire scelta dal giocatore, e colpisce la cella nella griglia AI
 	 * 
-	 * @param int row, riga scelta
-	 * @param int col, colonna scelta
+	 * @param row - riga scelta
+	 * @param col - colonna scelta
 	 * @throws IndexOutOfBoundsException - nel caso la cella non possa essere colpita
 	 * */
 	public void hitCell(int row, int col) throws IndexOutOfBoundsException{
@@ -138,7 +138,7 @@ public class BattleshipModel {
 	/**
 	 * Restituisce oggetto di tipo GridPlayerModel istanziato
 	 * 
-	 * @return GridPlayerModel oggetto istanziato
+	 * @return Modello della griglia del giocatore
 	 * */
 	public GridPlayerModel getGridPlayerModel() {
 		return this.playerModel;
@@ -147,7 +147,7 @@ public class BattleshipModel {
 	/**
 	 * Restituisce oggetto di tipo GridAIModel istanziato
 	 * 
-	 * @return GridAIModel oggetto istanziato
+	 * @return Modello della griglia dell'AI
 	 * */
 	public GridAIModel getGridAIModel() {
 		return this.aiModel;

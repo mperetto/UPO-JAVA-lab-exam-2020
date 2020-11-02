@@ -38,7 +38,7 @@ public class ShipModel {
 	/**
 	 * Restituisce orientamento nave
 	 * 
-	 * @return ShipOrientation orientamento nave
+	 * @return orientamento nave
 	 * */
 	public ShipOrientation getOrientation() {
 		return orientation;
@@ -47,7 +47,7 @@ public class ShipModel {
 	/**
 	 * Restituisce riga cella di partenza
 	 * 
-	 * @return int riga cella
+	 * @return riga cella
 	 * */
 	public int getPositionRow() {
 		return positionRow;
@@ -56,7 +56,7 @@ public class ShipModel {
 	/**
 	 * Restituisce colonna cella di partenza
 	 * 
-	 * @return int colonna cella
+	 * @return colonna cella
 	 * */
 	public int getPositionCol() {
 		return positionCol;
@@ -65,7 +65,7 @@ public class ShipModel {
 	/**
 	 * Restituisce dimensione nave
 	 * 
-	 * @return int dimensione della nave
+	 * @return dimensione della nave
 	 * */
 	public int getDimension() {
 		int dim = 0;

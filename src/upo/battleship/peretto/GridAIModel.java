@@ -39,7 +39,7 @@ public class GridAIModel extends GridModel implements Observer {
 	/**
 	 * Restituisce le cordinate della cella da colpire
 	 * 
-	 * @return cell, cella da colpire all'interno della griglia del player
+	 * @return Coordinate cella colpita all'interno della griglia del player
 	 * 
 	 * */
 	public int[] newMove() {
@@ -269,7 +269,7 @@ public class GridAIModel extends GridModel implements Observer {
 	/**
 	 * Crea un nuovo generatore random partendo da un seme fornito
 	 * 
-	 * @param long seed, seme di partenza per i numeri randomici
+	 * @param seed - seme di partenza per i numeri randomici
 	 * */
 	public void setRandomSeed(long seed) {
 		this.randGenerator = new Random(seed);

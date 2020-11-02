@@ -76,7 +76,7 @@ public class GridView extends JPanel implements Observer {
 	 * @param dim - la dimensione della griglia da generare
 	 * @param grid - matrice della griglia  in cui creare le celle
 	 * 
-	 * @return JPanel il pannello generato
+	 * @return il pannello generato
 	 * */
 	private JPanel generateGrid(int dim, JLabel[][] grid) {
 		JPanel gridPanel = new JPanel();
