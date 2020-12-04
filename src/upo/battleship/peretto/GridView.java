@@ -19,9 +19,6 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 
-import upo.observer.ObserverController;
-import upo.observer.ObserverModel;
-
 /**
  * La classe genera una vista grafica della griglia di un giocatore della partita.
  * 

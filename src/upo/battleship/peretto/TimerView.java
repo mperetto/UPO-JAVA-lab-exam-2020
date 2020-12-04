@@ -11,10 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import upo.observer.GridView;
-import upo.observer.ObserverController;
-import upo.observer.ObserverModel;
-
 public class TimerView extends JPanel {
 	
 	JFrame f = new JFrame("Battleship");
